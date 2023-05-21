@@ -1,10 +1,14 @@
 let materialPrices = {};
 
-function setMaterialPrices(sandPrice, aggregatePrice, cementPrice) {
+function setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, tilePrice) {
   materialPrices = {
     sandPrice,
     aggregatePrice,
-    cementPrice
+    cementPrice,
+    steelPrice,
+    HCBPrice,
+    paintPrice,
+    tilePrice
   };
 }
 
