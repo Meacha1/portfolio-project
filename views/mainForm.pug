@@ -37,11 +37,28 @@
 			<label for="below_ground_floors">Number of Floors Below Ground Level:</label>
 			<input type="number" id="below_ground_floors" name="belowGroundFloor" required>
 
-			<label for="finishing_quality">Finishing Quality:</label>
-			<select id="finishing_quality" name="finishingQuality" required>
-				<option value="high">High</option>
-				<option value="medium">Medium</option>
-				<option value="low">Low</option>
+			<label for="floor_finishing_type">Floor Finishing Quality:</label>
+			<select id="floor_finishing_type" name="floorFinishingType" required>
+				<option value="porceline">Porceline Local</option>
+				<option value="porceline1">Porceline Imported</option>
+				<option value="ceramic">Ceramic Local</option>
+				<option value="ceramic1">Ceramic Imported</option>
+				<option value="granite">Granite Local</option>
+				<option value="granite1">Granite Imported</option>
+				<option value="marble">Marble Local</option>
+				<option value="marble1">Marble Imported</option>
+			</select>
+
+			<label for="carpentry_and_joinery">Carpentry And Joinery Material Quality Grade:</label>
+			<select id="carpentry_and_joinery" name="carpentryAndJoinery" required>
+				<option value="low">Low-quality internal door with local material no built-in cupboard, and cabinets</option>
+				<option value="low1">Low-quality internal door, built-in cupboard, and cabinets with local material</option>
+				<option value="medium">Medium-quality internal door with local material no built-in cupboard, and cabinets</option>
+				<option value="medium1">Medium-quality internal door, built-in cupboard, and cabinets with local material</option>
+				<option value="high">High-quality internal door with local material no built-in cupboard, and cabinets</option>
+				<option value="high1">High-quality internal door, built-in cupboard, and cabinets with local material</option>
+				<option value="best">Best-quality -quality internal door with imported material no built-in cupboard, and cabinets</option>
+				<option value="best1">Best-quality -quality internal door, built-in cupboard, and cabinets with imported material</option>
 			</select>
 
 			<label for="roofing-material">Roofing Material:</label>
@@ -69,38 +86,23 @@
 				<option value="industrial">Industrial</option>
 			</select>
 
-			<label for="construction_type">Construction Type:</label>
-			<select id="construction_type" name="constructionType" required>
-				<option value="concrete">Concrete</option>
-				<option value="steel">Steel</option>
-				<option value="wood">Wood</option>
-			</select>
-
-			<label for="finishing_material">Finishing Material Quality Grade:</label>
-			<select id="finishing_material" name="finishingMaterial" required>
-				<option value="low">Low</option>
-				<option value="medium">Medium</option>
-				<option value="high">High</option>
-			</select>
 			<label for="sanitary_fixtures">Sanitary Fixtures Quality Grade:</label>
 			<select id="sanitary_fixtures" name="sanitaryFixtures" required>
 				<option value="low">Low</option>
 				<option value="medium">Medium</option>
 				<option value="high">High</option>
+				<option value="best">best</option>
 			</select>
 			<label for="electrical_material">Electrical Material Quality Grade:</label>
 			<select id="electrical_material" name="electricalMaterial" required>
 				<option value="low">Low</option>
 				<option value="medium">Medium</option>
 				<option value="high">High</option>
+				<option value="best">best</option>
 			</select>
 
 			<button type="submit" value="mainForm">Submit</button>
 		</form>
-	</div>
-	<div class="cost estimatio">
-		<h1>Estimated Cost</h1>
-		<h1 id="estimated-cost">The Total Estimation In ETB is: </h1>
 	</div>
 </body>
 <footer>

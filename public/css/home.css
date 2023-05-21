@@ -291,7 +291,7 @@ div.step1, div.step2, div.step3 {
     height: auto;
   }
   
-  .contact .contactlist .contact-card .contact-info {
+  div.contact-info {
     position: absolute;
     bottom: 0; /* initially hidden at the bottom */
     left: 0;
@@ -305,6 +305,6 @@ div.step1, div.step2, div.step3 {
   
  .contact .contact-card:hover .contact-info {
     height: 100%; /* slide the contact info up to cover the picture */
-    padding: 10px;
+    padding: 0px;
   }
   
