@@ -1,7 +1,6 @@
-const { getMaterialPrices } = require('./materialPrices');
 const { setMaterialPrices } = require('./materialPrices');
-const { materialsPromise } = require('./api/material_api');
-const { fetchDataFromDatabase } = require('./materialData');
+const { materialsPromise } = require('./materialData');
+const { getMaterialPrices } = require('./materialPrices');
 
 
 //material usage per meter square
@@ -10,9 +9,9 @@ var cement = 2.1527;  //quntal = 100 kg
 var sand = 0.5376;  //meter cube
 var aggregate = 0.41096;  //meter cube
 var steel = 43.01075;  //kg
-var HCB = 0.0;  //no
+var HCB = 17.3;  //no
 var paint = 0.183;  //liter
-var tile = 0.0;  //meter square
+var tile = 1.3;  //meter square
 
 //percentage of material usage
 
@@ -37,14 +36,22 @@ var reamingpercent = 100 - percentageSum;
 materialsPromise
   .then(prices => {
     // Set the material prices
-    const { sandPrice, aggregatePrice, cementPrice } = prices;
-    setMaterialPrices(sandPrice, aggregatePrice, cementPrice);
-    
-    // Usage example
-    const retrievedPrices = getMaterialPrices();
-    console.log(retrievedPrices.sandPrice);
-    console.log(retrievedPrices.aggregatePrice);
-    console.log(retrievedPrices.cementPrice);
+    const { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, tilePrice  } = prices;
+    setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, tilePrice);
+    var materialCost = {
+        cement: cement * getMaterialPrices().cementPrice,
+        sand: sand * getMaterialPrices().sandPrice,
+        aggregate: aggregate * getMaterialPrices().aggregatePrice,
+        steel: steel * getMaterialPrices().steelPrice,
+        HCB: HCB * getMaterialPrices().HCBPrice,
+        paint: paint * getMaterialPrices().paintPrice,
+        tile: tile * getMaterialPrices().tilePrice
+    };
+    var materialCostSum = Object.values(materialCost).reduce((a, b) => a + b, 0);
+    var otherCost = materialCostSum * (reamingpercent / percentageSum);
+    var totalmaterialCost = materialCostSum + otherCost;
+
+    return totalmaterialCost;
   })
   .catch(error => {
     console.error('Error fetching material prices:', error);
