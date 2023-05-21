@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Building Cost Estimation</title>
+	<link rel="stylesheet" href="../css/mainForm.css">
+</head>
+<body>
+	<header>
+		<nav>
+			
+			<ul>
+				<a href="/"><img src="../images/logo.png" alt="logo"></a>
+				<h1>MEE Cost Estimation</h1>
+				<li><a href="/">Home</a></li>
+				<li><a href="#abouteUs">About Us</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<ul>
+				<li>Hello #{username}</a></li>
+				<li><a href="/login" class="myButton">Login</a></li>
+				<li><a href="/createUser" class="myButton2">Create Account</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<h1>Building Cost Estimation</h1>
+		<form action="/mainForm" method="POST">
+			<label for="project-name">Project Name:</label>
+			<input type="text" id="project-name" name="projectName" required><br><br>
+
+			<label for="built-up-area">Built-up Area in m2:</label>
+			<input type="number" id="built-up-area" name="builtUpArea" required>
+
+			<label for="above_ground_floors">Number of Floors Above Ground Level:</label>
+			<input type="number" id="above_ground_floors" name="aboveGroundFloor" required>
+
+			<label for="below_ground_floors">Number of Floors Below Ground Level:</label>
+			<input type="number" id="below_ground_floors" name="belowGroundFloor" required>
+
+			<label for="finishing_quality">Finishing Quality:</label>
+			<select id="finishing_quality" name="finishingQuality" required>
+				<option value="high">High</option>
+				<option value="medium">Medium</option>
+				<option value="low">Low</option>
+			</select>
+
+			<label for="roofing-material">Roofing Material:</label>
+			<select id="roofing-material" name="roofingMaterial" required>
+				<option value="CIS Roof">CIS Roof</option>
+				<option value="Concerete Slab Roof">Concerete Slab Roof</option>
+			</select>
+
+			<label for="hvac-system">Is There HVAC System:</label>
+			<select id="HVAC System" name="HVACSystem" required>
+				<option value="Yes">Yes</option>
+				<option value="No">No</option>
+			</select>
+
+			<label for="fire-protection-syste">Is There Fire Protection System:</label>
+			<select id="fire-protection-syste" name="fireProtectionSyste" required>
+				<option value="Yes">Yes</option>
+				<option value="No">No</option>
+			</select>
+
+			<label for="building_type">Building Type:</label>
+			<select id="building_type" name="buildingType" required>
+				<option value="residential">Residential</option>
+				<option value="commercial">Commercial</option>
+				<option value="industrial">Industrial</option>
+			</select>
+
+			<label for="construction_type">Construction Type:</label>
+			<select id="construction_type" name="constructionType" required>
+				<option value="concrete">Concrete</option>
+				<option value="steel">Steel</option>
+				<option value="wood">Wood</option>
+			</select>
+
+			<label for="finishing_material">Finishing Material Quality Grade:</label>
+			<select id="finishing_material" name="finishingMaterial" required>
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+			<label for="sanitary_fixtures">Sanitary Fixtures Quality Grade:</label>
+			<select id="sanitary_fixtures" name="sanitaryFixtures" required>
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+			<label for="electrical_material">Electrical Material Quality Grade:</label>
+			<select id="electrical_material" name="electricalMaterial" required>
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+
+			<button type="submit" value="mainForm">Submit</button>
+		</form>
+	</div>
+	<div class="cost estimatio">
+		<h1>Estimated Cost</h1>
+		<h1 id="estimated-cost">The Total Estimation In ETB is: </h1>
+	</div>
+</body>
+<footer>
+	<p>&copy; 2023 Building Cost Estimation</p>
+</footer>
+</html>
