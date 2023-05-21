@@ -1,3 +1,14 @@
+const { calculateTotalMaterialCost } = require('./basePrice.js');
+
+calculateTotalMaterialCost()
+  .then(totalmaterialCost => {
+    console.log('Total Material Cost:', totalmaterialCost);
+    // You can use the totalmaterialCost value here or in other parts of your code
+  })
+  .catch(error => {
+    console.error('Error calculating total material cost:', error);
+  });
+
 function estimation(reqBody) {
   const area = parseInt(reqBody.builtUpArea);
   const noOfFloorsAboveGround = parseInt(reqBody.aboveGroundFloor);
