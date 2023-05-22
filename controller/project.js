@@ -1,47 +1,88 @@
 const { models: { Project } } = require('../models');
-const { estimation, calculateArea } = require('../algorism/test.js');
+const { estimation, calculateArea, calculateTotalMaterialCost } = require('../algorism/test.js');
 
 module.exports = {
-    estimate: async (req, res) => {
-        const { projectName,
-            builtUpArea,
-            aboveGroundFloor,
-            belowGroundFloor,
-            finishingQuality,
-            roofingMaterial,
-            HVACSystem,
-            fireProtectionSystem,
-            buildingType,
-            constructionType,
-            finishingMaterial,
-            sanitaryFixtures,
-            electricalMaterial
-          } = req.body;
-        if (req.body.projectName &&
-            req.body.builtUpArea &&
-            req.body.aboveGroundFloor &&
-            req.body.belowGroundFloor &&
-            req.body.finishingQuality &&
-            req.body.roofingMaterial &&
-            req.body.HVACSystem &&
-            req.body.fireProtectionSyste &&
-            req.body.buildingType &&
-            req.body.constructionType &&
-            req.body.finishingMaterial &&
-            req.body.sanitaryFixtures &&
-            req.body.electricalMaterial
-            ) {
-                const area = calculateArea(builtUpArea, aboveGroundFloor, belowGroundFloor);
-                const reqBody = req.body;
-                const costEstimate = estimation(reqBody).toLocaleString();
-                const createdAt = Date.now();
-                const updatedAt = Date.now();
+  estimate: async (req, res) => {
+    const {
+      projectName,
+      builtUpArea,
+      aboveGroundFloor,
+      belowGroundFloor,
+      floorFinishingType,
+      carpentryAndJoinery,
+      roofingMaterial,
+      HVACSystem,
+      fireProtectionSystem,
+      buildingType,
+      sanitaryFixtures,
+      electricalMaterial
+    } = req.body;
+    
+    if (
+      projectName &&
+      builtUpArea &&
+      aboveGroundFloor &&
+      belowGroundFloor &&
+      floorFinishingType &&
+      carpentryAndJoinery &&
+      roofingMaterial &&
+      HVACSystem &&
+      fireProtectionSystem &&
+      buildingType &&
+      sanitaryFixtures &&
+      electricalMaterial
+    ) {
+      const area = await calculateArea(builtUpArea, aboveGroundFloor, belowGroundFloor);
+      const reqBody = req.body;
 
-                res.render('output', { projectName, area, costEstimate, createdAt, updatedAt });
+      const totalmaterialCost = await calculateTotalMaterialCost(); // Calculate totalmaterialCost
 
-        } else {
-            res.send("Not added to the database!")
-        }
+      const costEstimate = estimation(totalmaterialCost, reqBody); // Pass totalmaterialCost to estimation function
+
+      const createdAt = Date.now();
+      const updatedAt = Date.now();
+
+      const project = await Project.create({
+        projectName,
+        builtUpArea,
+        aboveGroundFloor,
+        belowGroundFloor,
+        floorFinishingType,
+        carpentryAndJoinery,
+        roofingMaterial,
+        HVACSystem,
+        fireProtectionSystem,
+        buildingType,
+        sanitaryFixtures,
+        electricalMaterial,
+        costEstimate,
+        createdAt,
+        updatedAt
+      });
+
+      const formattedCostEstimate = costEstimate.toLocaleString();
+
+      res.render('output', {
+        projectName,
+        builtUpArea,
+        costEstimate: formattedCostEstimate,
+        createdAt,
+        updatedAt,
+        area,
+        buildingType,
+        carpentryAndJoinery,
+        roofingMaterial,
+        HVACSystem,
+        aboveGroundFloor,
+        belowGroundFloor,
+        buildingType,
+        sanitaryFixtures,
+        electricalMaterial,
+        floorFinishingType,
+        fireProtectionSystem
+      });
+    } else {
+      res.send("Not added to the database!");
     }
-
+  }
 };

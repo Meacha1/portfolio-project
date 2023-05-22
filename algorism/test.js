@@ -1,28 +1,19 @@
 const { calculateTotalMaterialCost } = require('./basePrice.js');
 
-calculateTotalMaterialCost()
-  .then(totalmaterialCost => {
-    console.log('Total Material Cost:', totalmaterialCost);
-    // You can use the totalmaterialCost value here or in other parts of your code
-  })
-  .catch(error => {
-    console.error('Error calculating total material cost:', error);
-  });
-
-function estimation(reqBody) {
+function estimation(totalmaterialCost, reqBody) {
   const area = parseInt(reqBody.builtUpArea);
   const noOfFloorsAboveGround = parseInt(reqBody.aboveGroundFloor);
   const noOfFloorsBelowGround = parseInt(reqBody.belowGroundFloor);
   const grosArea = calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround);
   const roofingMaterial = reqBody.roofingMaterial;
   const HVAC = reqBody.HVACSystem;
-  const fireProtection = reqBody.fireProtectionSyste;
+  const fireProtection = reqBody.fireProtectionSystem;
   const building = reqBody.buildingType;
   const constructionType = reqBody.constructionType;
   const sanitaQuantity = reqBody.sanitaryFixtures;
   const electricalQuantity = reqBody.electricalMaterial;
 
-  var costPerSquareMeter = 30000;
+  var costPerSquareMeter = totalmaterialCost; // Assign totalmaterialCost to costPerSquareMeter
 
   if (roofingMaterial == "CIS Roof") {
     costPerSquareMeter += 0;
@@ -30,7 +21,7 @@ function estimation(reqBody) {
     costPerSquareMeter += 2000;
   } else {
     costPerSquareMeter -= 1000;
-  };
+  }
 
   if (HVAC == "Yes") {
     costPerSquareMeter += 3000;
@@ -43,26 +34,31 @@ function estimation(reqBody) {
   } else {
     costPerSquareMeter -= 1000;
   }
-   if (building == "residential") {
+  
+  if (building == "residential") {
     costPerSquareMeter += 2000;
   } else {
     costPerSquareMeter -= 1000;
   }
-    if (constructionType == "concrete") {
+  
+  if (constructionType == "concrete") {
     costPerSquareMeter += 2000;
   } else {
     costPerSquareMeter -= 1000;
   }
-    if (sanitaQuantity == "high") {
+  
+  if (sanitaQuantity == "high") {
     costPerSquareMeter += 1000;
   } else {
     costPerSquareMeter -= 1000;
   }
-    if (electricalQuantity == "high") {
+  
+  if (electricalQuantity == "high") {
     costPerSquareMeter += 2000;
   } else {
     costPerSquareMeter -= 2000;
   }
+  
   const totalCost = grosArea * costPerSquareMeter;
   return totalCost;
 }
@@ -72,4 +68,4 @@ function calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround) {
   return parseFloat(totalArea);
 }
 
-module.exports = { estimation, calculateArea };
+module.exports = { estimation, calculateArea, calculateTotalMaterialCost };

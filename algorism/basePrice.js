@@ -58,6 +58,4 @@ const calculateTotalMaterialCost = () => {
   });
 };
 
-module.exports = {
-  calculateTotalMaterialCost
-};
+module.exports = { calculateTotalMaterialCost };
