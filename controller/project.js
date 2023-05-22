@@ -35,7 +35,7 @@ module.exports = {
       const area = await calculateArea(builtUpArea, aboveGroundFloor, belowGroundFloor);
       const reqBody = req.body;
 
-      const totalmaterialCost = await calculateTotalMaterialCost(); // Calculate totalmaterialCost
+      const totalmaterialCost = await calculateTotalMaterialCost(reqBody); // Calculate totalmaterialCost
 
       const costEstimate = estimation(totalmaterialCost, reqBody); // Pass totalmaterialCost to estimation function
 

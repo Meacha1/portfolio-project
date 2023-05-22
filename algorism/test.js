@@ -10,10 +10,11 @@ function estimation(totalmaterialCost, reqBody) {
   const fireProtection = reqBody.fireProtectionSystem;
   const building = reqBody.buildingType;
   const constructionType = reqBody.constructionType;
-  const sanitaQuantity = reqBody.sanitaryFixtures;
-  const electricalQuantity = reqBody.electricalMaterial;
+  const sanitaQuality = reqBody.sanitaryFixtures;
+  const electricalQuality = reqBody.electricalMaterial;
 
   var costPerSquareMeter = totalmaterialCost; // Assign totalmaterialCost to costPerSquareMeter
+  console.log(costPerSquareMeter);
 
   if (roofingMaterial == "CIS Roof") {
     costPerSquareMeter += 0;
@@ -47,17 +48,7 @@ function estimation(totalmaterialCost, reqBody) {
     costPerSquareMeter -= 1000;
   }
   
-  if (sanitaQuantity == "high") {
-    costPerSquareMeter += 1000;
-  } else {
-    costPerSquareMeter -= 1000;
-  }
-  
-  if (electricalQuantity == "high") {
-    costPerSquareMeter += 2000;
-  } else {
-    costPerSquareMeter -= 2000;
-  }
+
   
   const totalCost = grosArea * costPerSquareMeter;
   return totalCost;
@@ -69,3 +60,11 @@ function calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround) {
 }
 
 module.exports = { estimation, calculateArea, calculateTotalMaterialCost };
+
+
+
+
+
+
+
+  
