@@ -21,9 +21,15 @@ const materialsPromise = Promise.all([
     const steelPrice = materialsData.find((item) => item.item === 'steel').price;
     const HCBPrice = materialsData.find((item) => item.item === 'HCB').price;
     const paintPrice = materialsData.find((item) => item.item === 'paint').price;
-    const tilePrice = materialsData.find((item) => item.item === 'tile').price;
+    const marbleLocalPrice = materialsData.find((item) => item.item === 'marbleLocal').price;
+    const graniteLocalPrice = materialsData.find((item) => item.item === 'graniteLocal').price;
+    const graniteImportedPrice = materialsData.find((item) => item.item === 'graniteImported').price;
+    const ceramicLocalPrice = materialsData.find((item) => item.item === 'ceramicLocal').price;
+    const ceramicImportedPrice = materialsData.find((item) => item.item === 'ceramicImported').price;
+    const porcelineLocalPrice = materialsData.find((item) => item.item === 'porcelineLocal').price;
+    const porcelineImportedPrice = materialsData.find((item) => item.item === 'porcelineImported').price;
     
-    return { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, tilePrice };
+    return { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice  };
   })
   .catch(error => {
     console.error('Error fetching data from database:', error);

@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');  //Make sure to add the express-session middleware before initializing Passport.js
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+// Import the my api file
+const app1 = require('./algorism/api/material_api');
+const port1 = 4003;
 
 const users = require('./routes/users');
 const posts = require('./routes/posts');
@@ -70,6 +73,11 @@ app.use('/mainForm',mainForm);
 
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+// Start the api app on port 4003
+app1.listen(port1, () => {
+  console.log(`App 1 running on port ${port1}`);
 });
 
 

@@ -1,6 +1,6 @@
 let materialPrices = {};
 
-function setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, tilePrice) {
+function setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice) {
   materialPrices = {
     sandPrice,
     aggregatePrice,
@@ -8,7 +8,13 @@ function setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, H
     steelPrice,
     HCBPrice,
     paintPrice,
-    tilePrice
+    marbleLocalPrice,
+    graniteLocalPrice,
+    graniteImportedPrice,
+    ceramicLocalPrice,
+    ceramicImportedPrice,
+    porcelineLocalPrice,
+    porcelineImportedPrice
   };
 }
 
