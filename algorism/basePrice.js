@@ -37,7 +37,9 @@ const calculateTotalMaterialCost = (reqBody) => {
         HCB: 4.5,
         paint: 4,
         tile: 6,
-        carpentryAndJoinery: 0
+        carpentryAndJoinery: 0,
+        HVAC: 0,
+        fireprotection: 0
       };
 
       var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
@@ -156,20 +158,58 @@ const calculateTotalMaterialCost = (reqBody) => {
       const carpentryAndJoinery = reqBody.carpentryAndJoinery;
 
       if (reqBody.carpentryAndJoinery == "low") {
-        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 1;
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery + 1;
       }
 
       if (reqBody.carpentryAndJoinery == "low1") {
-        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery + 0.5;
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 0.5;
+      }
+
+      if (reqBody.carpentryAndJoinery == "medium") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 1.5;
+      }
+
+      if (reqBody.carpentryAndJoinery == "medium1") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 1.5;
+      }
+
+      if (reqBody.carpentryAndJoinery == "high") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 2;
+      }
+
+      if (reqBody.carpentryAndJoinery == "high1") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 3;
+      }
+
+      if (reqBody.carpentryAndJoinery == "best") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 3;
+      }
+
+      if (reqBody.carpentryAndJoinery == "best1") {
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 4;
       }
 
 
-      console.log(percentage.carpentryAndJoinery);
+      // apply logic for HVAC
+
+      if (reqBody.HVACSystem == "Yes") {
+        percentage.HVAC = percentage.HVAC - 1.5;
+      }
+
+      // apply logic for fire protection system
+
+      if (reqBody.fireProtectionSystem == "Yes") {
+        percentage.fireprotection = percentage.fireprotection - 0.75;
+      }
+
+      // apply logic for buiding type
+
+      if (reqBody.buildingType == "commercial" || reqBody.buildingType == "industrial") {
+        otherPercentage = otherPercentage + 2.5;
+      }
       
       var percentageSum = Object.values(percentage).reduce((a, b) => a + b, 0);
       var remainingPercent = 100 - percentageSum;
-      console.log('precentage.tile: ', percentage.tile)
-      console.log('percentageSum: ', percentageSum)
         
       var materialCost = {
         cement: cement * getMaterialPrices().cementPrice,

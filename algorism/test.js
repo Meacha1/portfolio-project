@@ -1,10 +1,9 @@
 const { calculateTotalMaterialCost } = require('./basePrice.js');
 
 function estimation(totalmaterialCost, reqBody) {
-  const area = parseInt(reqBody.builtUpArea);
-  const noOfFloorsAboveGround = parseInt(reqBody.aboveGroundFloor);
-  const noOfFloorsBelowGround = parseInt(reqBody.belowGroundFloor);
-  const grosArea = calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround);
+  const area = parseFloat(reqBody.builtUpArea);
+  var noOfFloorsAboveGround = parseFloat(reqBody.aboveGroundFloor);
+  var noOfFloorsBelowGround = parseFloat(reqBody.belowGroundFloor);
   const roofingMaterial = reqBody.roofingMaterial;
   const HVAC = reqBody.HVACSystem;
   const fireProtection = reqBody.fireProtectionSystem;
@@ -17,14 +16,17 @@ function estimation(totalmaterialCost, reqBody) {
   console.log(costPerSquareMeter);
 
   
-
-  
+  // logic for roof type
+  if (roofingMaterial == "Concerete Slab Roof") {
+    noOfFloorsAboveGround = noOfFloorsAboveGround + 0.4;   // considering the roof slabs steel and cements
+  }
+  const grosArea = calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround);
   const totalCost = grosArea * costPerSquareMeter;
   return totalCost;
 }
 
 function calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround) {
-  const totalArea = parseInt(area) * (parseInt(noOfFloorsAboveGround) + parseInt(noOfFloorsBelowGround) + 1);
+  const totalArea = parseFloat(area) * (parseFloat(noOfFloorsAboveGround) + parseFloat(noOfFloorsBelowGround) + 1);
   return parseFloat(totalArea);
 }
 
