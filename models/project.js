@@ -17,11 +17,16 @@ module.exports = (sequelize, DataTypes) => {
         electricalMaterial: DataTypes.STRING,
         costEstimate: DataTypes.INTEGER,
         createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE
+        updatedAt: DataTypes.DATE,
+        userId: DataTypes.INTEGER
     },
     {
         freezeTableName: true
     });
+
+    Project.associate = (models) => {
+        Project.belongsTo(models.User, { foreignKey: 'id' });
+    };
 
     return Project;
 };

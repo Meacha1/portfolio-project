@@ -16,13 +16,21 @@
 				<li><a href="#contact">Contact</a></li>
 			</ul>
 			<ul>
-				<li>Hello #{username}</a></li>
-				<li><a href="/login" class="myButton">Login</a></li>
-				<li><a href="/createUser" class="myButton2">Create Account</a></li>
+				<li>Hello, #{username}</a></li>
+				<li><a href="/logout" class="myButton">Logout</a></li>
+				<li><a href="/createUser" class="myButton2">My Projects</a></li>
 			</ul>
 		</nav>
 	</header>
 	<div class="container">
+	<div class="projects">
+		<h2>My projects</h2>
+		ul
+			each projectname in projectnames
+				li
+					a(href='http://localhost:4004/api/project/' + projectname) #{projectname}
+	</div>
+	<div class="main">
 		<h1>Building Cost Estimation</h1>
 		<form action="/mainForm" method="POST">
 			<label for="project-name">Project Name:</label>
@@ -52,7 +60,7 @@
 			<select id="carpentry_and_joinery" name="carpentryAndJoinery" required>
 				<option value="low">Low-quality internal door with local material no built-in cupboard, and cabinets</option>
 				<option value="low1">Low-quality internal door, built-in cupboard, and cabinets with local material</option>
-				<option value="medium">Medium-quality internal door with local material no built-in cupboard, and cabinets</option>
+				<option value="medium" selected>Medium-quality internal door with local material no built-in cupboard, and cabinets</option>
 				<option value="medium1">Medium-quality internal door, built-in cupboard, and cabinets with local material</option>
 				<option value="high">High-quality internal door with local material no built-in cupboard, and cabinets</option>
 				<option value="high1">High-quality internal door, built-in cupboard, and cabinets with local material</option>
@@ -88,20 +96,20 @@
 			<label for="sanitary_fixtures">Sanitary Fixtures Quality Grade:</label>
 			<select id="sanitary_fixtures" name="sanitaryFixtures" required>
 				<option value="low">Low</option>
-				<option value="medium">Medium</option>
+				<option value="medium" selected>Medium</option>
 				<option value="high">High</option>
 				<option value="best">Best</option>
 			</select>
 			<label for="electrical_material">Electrical Material Quality Grade:</label>
 			<select id="electrical_material" name="electricalMaterial" required>
 				<option value="low">Low</option>
-				<option value="medium">Medium</option>
+				<option value="medium" selected>Medium</option>
 				<option value="high">High</option>
 				<option value="best">Best</option>
 			</select>
-
 			<button type="submit" value="mainForm">Submit</button>
 		</form>
+	</div>
 	</div>
 </body>
 <footer>

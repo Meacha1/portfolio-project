@@ -55,8 +55,23 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .container {
-    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    width: 99%;
     margin: 0 auto;
+}
+
+.projects {
+    background-color:#f7f4f4;
+    justify-content: center;
+    width: 25%;
+    border: #333 1px solid;
+    border-radius: 15px;   
+}
+
+.main {
+    width: 65%;
+    margin-right: 50px;
 }
 
 h1 {
@@ -80,11 +95,15 @@ input[type=number], select {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
+input#project-name {
+    font-size: medium;
+    padding: 8px;
+}
 button[type=submit] {
-    background-color: #4CAF50;
+    background-color: #16b9b9;
     color: white;
-    padding: 0.5rem;
+    font-size: large;
+    padding: 13px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -92,7 +111,7 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-    background-color: #16b9b9;
+    background-color: #0f8181;
 }
 
 footer {

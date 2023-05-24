@@ -17,6 +17,14 @@ module.exports = {
       sanitaryFixtures,
       electricalMaterial
     } = req.body;
+
+    const project = await Project.findOne({ where: { projectName } });
+    if (project) {
+      return res.render('mainForm', { warning: 'Project already exists' });
+    }
+
+    const userId = req.session.userId;
+    console.log(userId);
     
     if (
       projectName &&
@@ -57,7 +65,8 @@ module.exports = {
         electricalMaterial,
         costEstimate,
         createdAt,
-        updatedAt
+        updatedAt,
+        userId
       });
 
       const formattedCostEstimate = costEstimate.toLocaleString();
@@ -84,5 +93,5 @@ module.exports = {
     } else {
       res.send("Not added to the database!");
     }
-  }
+  },
 };

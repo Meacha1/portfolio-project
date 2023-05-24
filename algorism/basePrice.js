@@ -39,7 +39,9 @@ const calculateTotalMaterialCost = (reqBody) => {
         tile: 6,
         carpentryAndJoinery: 0,
         HVAC: 0,
-        fireprotection: 0
+        fireprotection: 0,
+        sanitaryFixtures: 0,
+        electricalMaterial: 0
       };
 
       var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
@@ -166,11 +168,11 @@ const calculateTotalMaterialCost = (reqBody) => {
       }
 
       if (reqBody.carpentryAndJoinery == "medium") {
-        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 1.5;
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 0.5;
       }
 
       if (reqBody.carpentryAndJoinery == "medium1") {
-        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 1.5;
+        percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 2;
       }
 
       if (reqBody.carpentryAndJoinery == "high") {
@@ -207,6 +209,40 @@ const calculateTotalMaterialCost = (reqBody) => {
       if (reqBody.buildingType == "commercial" || reqBody.buildingType == "industrial") {
         otherPercentage = otherPercentage + 2.5;
       }
+
+      // apply logic for sanitary installation
+
+      if (reqBody.sanitaryFixtures == "low"){
+        percentage.sanitaryFixtures = percentage.sanitaryFixtures + 1;
+      }
+
+      // do nothing for medium
+
+      if (reqBody.sanitaryFixtures == "high"){
+        percentage.sanitaryFixtures = percentage.sanitaryFixtures - 1.25;
+      }
+
+      if (reqBody.sanitaryFixtures == "best"){
+        percentage.sanitaryFixtures = percentage.sanitaryFixtures - 2;
+      }
+
+            // apply logic for electrical installation
+
+      if (reqBody.electricalMaterial == "low"){
+        percentage.electricalMaterial = percentage.electricalMaterial + 1;
+      }
+
+      // do nothing for medium
+
+      if (reqBody.electricalMaterial == "high"){
+        percentage.electricalMaterial = percentage.electricalMaterial - 1.25;
+      }
+
+      if (reqBody.electricalMaterial == "best"){
+        percentage.electricalMaterial = percentage.electricalMaterial - 2;
+      }
+
+
       
       var percentageSum = Object.values(percentage).reduce((a, b) => a + b, 0);
       var remainingPercent = 100 - percentageSum;

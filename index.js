@@ -8,7 +8,9 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 // Import the my api file
 const app1 = require('./algorism/api/material_api');
+const app2 = require('./algorism/api/project_api');
 const port1 = 4003;
+const port2 = 4004;
 
 const users = require('./routes/users');
 const posts = require('./routes/posts');
@@ -80,6 +82,9 @@ app1.listen(port1, () => {
   console.log(`App 1 running on port ${port1}`);
 });
 
+app2.listen(port2, () => {
+  console.log(`App 2 running on port ${port2}`);
+});
 
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
