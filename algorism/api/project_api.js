@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'new_express_app'
+  database: 'const_estimator_db'
 });
 
 // Define the materials route
