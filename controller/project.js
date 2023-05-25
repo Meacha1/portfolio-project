@@ -18,13 +18,18 @@ module.exports = {
       electricalMaterial
     } = req.body;
 
-    const project = await Project.findOne({ where: { projectName } });
-    if (project) {
-      return res.render('mainForm', { warning: 'Project already exists' });
+    const userId = req.session.userId;   //
+    if (!userId) {
+      res.send("User ID not available");
+      return;
     }
 
-    const userId = req.session.userId;
-    console.log(userId);
+    const userProject = await Project.findOne({ where: { projectName, userId } });
+    if (userProject) {
+      res.send("Project name already exists");
+      return;
+    }
+
     
     if (
       projectName &&

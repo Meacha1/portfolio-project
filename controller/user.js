@@ -45,11 +45,30 @@ module.exports = {
             
             if (user) {
                 res.render('sorry');
-            }
+            } else {
             await User.create({ email, username, password });
             res.render('congratulationsUser', { username });
+            }
         } else {
         res.send("Not added to the database!")
     }
-} 
+},
+displyProject: async (req, res) => {
+
+            try {
+                const response = await fetch(`http://localhost:4004/api/projects/${ projectName }`);
+                if (response.ok) {
+                  const projects = await response.json();
+                  const projectnames = projects.map((project) => project.projectName);
+                  console.log(`my projects are: ${projectnames}`);
+                  res.render('mainForm', { username, projectnames });
+                } else {
+                  console.error('Error retrieving user projects:', response.status);
+                  res.send('Error retrieving user projects');
+                }
+              } catch (error) {
+                console.error('Error retrieving user projects:', error);
+                res.send('Error retrieving user projects');
+              }
+        }
 };

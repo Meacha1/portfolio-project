@@ -62,7 +62,8 @@ body {
 }
 
 .projects {
-    background-color:#f7f4f4;
+    background-color:#faf6f6;
+    padding-left: 10px;
     justify-content: center;
     width: 25%;
     border: #333 1px solid;
@@ -98,6 +99,8 @@ input[type=number], select {
 input#project-name {
     font-size: medium;
     padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 button[type=submit] {
     background-color: #16b9b9;

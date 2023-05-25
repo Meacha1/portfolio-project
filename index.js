@@ -18,6 +18,7 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const createUser = require('./routes/createUser');
 const mainForm = require('./routes/mainForm');
+const displayProject = require('./routes/myProject');
 
 app.use(session({                   //Make sure to add the express-session middleware before initializing Passport.js
     secret: '123456789', 
@@ -72,6 +73,7 @@ app.use('/login',login);
 app.use('/logout',logout)
 app.use('/createUser',createUser);
 app.use('/mainForm',mainForm);
+app.use('/displayProject', displayProject);
 
 app.get('/', (req, res) => {
     res.render('home');

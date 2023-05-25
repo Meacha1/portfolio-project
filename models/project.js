@@ -23,10 +23,5 @@ module.exports = (sequelize, DataTypes) => {
     {
         freezeTableName: true
     });
-
-    Project.associate = (models) => {
-        Project.belongsTo(models.User, { foreignKey: 'id' });
-    };
-
     return Project;
 };
