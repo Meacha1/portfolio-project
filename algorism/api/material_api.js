@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'price_list'
+  database: 'const_estimator_db'
 });
 
 // Define the materials route
@@ -23,7 +23,7 @@ app.get('/api/materials', (req, res) => {
     }
 
     // Define the SQL query
-    const query = 'SELECT * FROM material';
+    const query = 'SELECT * FROM materialprice';
 
     // Execute the query
     connection.query(query, (error, results) => {

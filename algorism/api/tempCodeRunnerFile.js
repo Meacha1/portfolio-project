@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'price_list'
+  database: 'const_estimator_db'
 });
 
 // Define the materials route
