@@ -1,50 +1,110 @@
 doctype html
 html
   head
-    title Cost Estimate Form
-    script.
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('loadDataButton').addEventListener('click', function() {
-          fetch('http://localhost:4004/api/project/My%20Building%20in%20Summit')
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(data) {
-              document.getElementById('projectName').textContent = data[0].projectName;
-              document.getElementById('area').textContent = data[0].builtUpArea;
-              document.getElementById('costEstimate').textContent = data[0].costEstimate;
-              document.getElementById('builtUpArea').textContent = data[0].builtUpArea;
-              document.getElementById('aboveGroundFloor').textContent = data[0].aboveGroundFloor;
-              document.getElementById('belowGroundFloor').textContent = data[0].belowGroundFloor;
-              document.getElementById('floorFinishingType').textContent = data[0].floorFinishingType;
-              document.getElementById('carpentryAndJoinery').textContent = data[0].carpentryAndJoinery;
-              document.getElementById('roofingMaterial').textContent = data[0].roofingMaterial;
-              document.getElementById('HVACSystem').textContent = data[0].HVACSystem;
-              document.getElementById('fireProtectionSystem').textContent = data[0].fireProtectionSystem;
-              document.getElementById('buildingType').textContent = data[0].buildingType;
-              document.getElementById('sanitaryFixtures').textContent = data[0].sanitaryFixtures;
-              document.getElementById('electricalMaterial').textContent = data[0].electricalMaterial;
-            })
-            .catch(function(error) {
-              console.log('Error:', error);
-            });
-        });
-      })
+    title Building Cost Estimation
+    link(rel='stylesheet', href='../css/myProject.css')
 
   body
-    button#loadDataButton Load Data
-    form#projectForm
+    header
+      nav
+        ul
+          a(href='/')
+            img(src='../images/logo.png', alt='logo')
+          h1 MEE Cost Estimation
+          li
+            a(href='/') Home
+          li
+            a(href='#abouteUs') About Us
+          li
+            a(href='#contact') Contact
+        ul
+          li Hello, #{username}
+          li
+            a(href='/logout', class='myButton') Logout
+          li
+            a(href='/createUser', class='myButton2') My Projects
+
+  .container
+    form.main(action='/mainForm', method='POST', onsubmit='return validateForm()')
       h1 Cost Estimate
-      p Project Name: #[span#projectName]
-      p The area is: #[span#area] and the cost estimate is: #[span#costEstimate]
-      p Built-up Area: #[span#builtUpArea] sqm
-      p Above Ground Floor: #[span#aboveGroundFloor] floors
-      p Below Ground Floor: #[span#belowGroundFloor] floors
-      p Floor Finishing Type: #[span#floorFinishingType]
-      p Carpentry And Joinery: #[span#carpentryAndJoinery]
-      p Roofing Material: #[span#roofingMaterial]
-      p HVAC System: #[span#HVACSystem]
-      p Fire Protection System: #[span#fireProtectionSystem]
-      p Building Type: #[span#buildingType]
-      p Sanitary Fixtures: #[span#sanitaryFixtures]
-      p Electrical Material: #[span#electricalMaterial]
+      label(for='project-name') Project Name:
+      input#project-name(type='text', name='projectName', value=data[0].projectName, required)
+      br
+
+      label(for='built-up-area') Built-up Area in m2:
+      input#built-up-area(type='number', name='builtUpArea', min='0', value=data[0].builtUpArea, required)
+      br
+
+      label(for='above_ground_floors') Number of Floors Above Ground Level:
+      input#above_ground_floors(type='number', name='aboveGroundFloor', min='0', value=data[0].aboveGroundFloor, required)
+      br
+
+      label(for='below_ground_floors') Number of Floors Below Ground Level:
+      input#below_ground_floors(type='number', name='belowGroundFloor', min='0', value=data[0].belowGroundFloor, required)
+      br
+
+      label(for='floor_finishing_type') Floor Finishing Quality:
+      select#floor_finishing_type(name='floorFinishingType', required)
+        option(value='porcelineLocal', selected=data[0].floorFinishingType==='porcelineLocal') Porceline Local
+        option(value='porcelineImported', selected=data[0].floorFinishingType==='porcelineImported') Porceline Imported
+        option(value='ceramicLocal', selected=data[0].floorFinishingType==='ceramicLocal') Ceramic Local
+        option(value='ceramicImported', selected=data[0].floorFinishingType==='ceramicImported') Ceramic Imported
+        option(value='graniteLocal', selected=data[0].floorFinishingType==='graniteLocal') Granite Local
+        option(value='graniteImported', selected=data[0].floorFinishingType==='graniteImported') Granite Imported
+        option(value='marbleLocal', selected=data[0].floorFinishingType==='marbleLocal') Marble Local
+      br
+
+      label(for='carpentry_and_joinery') Carpentry And Joinery Material Quality Grade:
+      select#carpentry_and_joinery(name='carpentryAndJoinery', required)
+        option(value='low', selected=data[0].carpentryAndJoinery==='low') Low-quality internal door with local material no built-in cupboard, and cabinets
+        option(value='low1', selected=data[0].carpentryAndJoinery==='low1') Low-quality internal door, built-in cupboard, and cabinets with local material
+        option(value='medium', selected=data[0].carpentryAndJoinery==='medium') Medium-quality internal door with local material no built-in cupboard, and cabinets
+        option(value='medium1', selected=data[0].carpentryAndJoinery==='medium1') Medium-quality internal door, built-in cupboard, and cabinets with local material
+        option(value='high', selected=data[0].carpentryAndJoinery==='high') High-quality internal door with local material no built-in cupboard, and cabinets
+        option(value='high1', selected=data[0].carpentryAndJoinery==='high1') High-quality internal door, built-in cupboard, and cabinets with local material
+        option(value='best', selected=data[0].carpentryAndJoinery==='best') Best-quality internal door with imported material no built-in cupboard, and cabinets
+        option(value='best1', selected=data[0].carpentryAndJoinery==='best1') Best-quality internal door, built-in cupboard, and cabinets with imported material
+      br
+
+      label(for='roofing-material') Roofing Material:
+      select#roofing-material(name='roofingMaterial', required)
+        option(value='CIS Roof', selected=data[0].roofingMaterial==='CIS Roof') CIS Roof
+        option(value='Concrete Slab Roof', selected=data[0].roofingMaterial==='Concrete Slab Roof') Concrete Slab Roof
+      br
+
+      label(for='hvac-system') Is There HVAC System:
+      select#HVAC System(name='HVACSystem', required)
+        option(value='Yes', selected=data[0].HVACSystem==='Yes') Yes
+        option(value='No', selected=data[0].HVACSystem==='No') No
+      br
+
+      label(for='fire-protection-system') Is There Fire Protection System:
+      select#fire-protection-system(name='fireProtectionSystem', required)
+        option(value='Yes', selected=data[0].fireProtectionSystem==='Yes') Yes
+        option(value='No', selected=data[0].fireProtectionSystem==='No') No
+      br
+
+      label(for='building_type') Building Type:
+      select#building_type(name='buildingType', required)
+        option(value='residential', selected=data[0].buildingType==='residential') Residential
+        option(value='commercial', selected=data[0].buildingType==='commercial') Commercial
+        option(value='industrial', selected=data[0].buildingType==='industrial') Industrial
+      br
+
+      label(for='sanitary_fixtures') Sanitary Fixtures Quality Grade:
+      select#sanitary_fixtures(name='sanitaryFixtures', required)
+        option(value='low', selected=data[0].sanitaryFixtures==='low') Low
+        option(value='medium', selected=data[0].sanitaryFixtures==='medium') Medium
+        option(value='high', selected=data[0].sanitaryFixtures==='high') High
+        option(value='best', selected=data[0].sanitaryFixtures==='best') Best
+      br
+
+      label(for='electrical_material') Electrical Material Quality Grade:
+      select#electrical_material(name='electricalMaterial', required)
+        option(value='low', selected=data[0].electricalMaterial==='low') Low
+        option(value='medium', selected=data[0].electricalMaterial==='medium') Medium
+        option(value='high', selected=data[0].electricalMaterial==='high') High
+        option(value='best', selected=data[0].electricalMaterial==='best') Best
+      br
+
+      button(type='submit', value='mainForm') Submit

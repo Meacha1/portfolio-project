@@ -3,8 +3,10 @@ const router = express.Router();
 const fetch = require('node-fetch');
 
 router.get('/', (req, res) => {
-  // Make your API call here
-  fetch('http://localhost:4004/api/project/My%20Building%20in%20Summit')
+  const projectName = req.query['projectName'];
+  console.log(`my project name is: ${projectName}`);
+  // Make your API call using the projectName variable
+  fetch(`http://localhost:4004/api/project/${encodeURIComponent(projectName)}`)
     .then(response => response.json())
     .then(data => {
       // Render the Pug template and pass the API response data as a variable

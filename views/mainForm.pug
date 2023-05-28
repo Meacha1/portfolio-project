@@ -28,7 +28,7 @@
 		ul
 			each projectname in projectnames
 				li
-					a(href='displayProject') #{projectname}
+					a(href='/displayProject?projectName=' + encodeURIComponent(projectname)) #{projectname}
 	</div>
 	<div class="main">
 		<h1>Building Cost Estimation</h1>
