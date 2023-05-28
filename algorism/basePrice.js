@@ -23,20 +23,20 @@ const calculateTotalMaterialCost = (reqBody) => {
       var cement = 2.1527; // quntal = 100 kg
       var sand = 0.5376; // meter cube
       var aggregate = 0.41096; // meter cube
-      var steel = 43.01075; // kg
-      var HCB = 17.3; // no
+      var steel = 41.01075; // kg 43.01075
+      var HCB = 1.3; // no 17.3
       var paint = 0.183; // liter
       var tile = 1.3; // meter square
 
       // Percentage of material usage
       var percentage = {
         cement: 16,
-        sand: 12,
+        sand: 12.5,
         aggregate: 7.5,
-        steel: 24,
+        steel: 24.5,
         HCB: 4.5,
         paint: 4,
-        tile: 6,
+        tile: 7,
         carpentryAndJoinery: 0,
         HVAC: 0,
         fireprotection: 0,

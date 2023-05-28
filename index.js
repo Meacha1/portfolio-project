@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const path = require('path');
 const db = require('./models');
 const cookieParser = require('cookie-parser');
@@ -66,7 +67,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));  // very important to put this global middleware before the routes
                                                   // we need this two middleware for out post request, to acces our data
-
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/login',login);

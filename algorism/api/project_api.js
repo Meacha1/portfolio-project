@@ -1,8 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 
 const app2 = express();
 const port2 = 4004;
+
+app2.use(cors()); // Enable CORS for all routes
 
 // Create a MySQL pool
 const pool = mysql.createPool({
