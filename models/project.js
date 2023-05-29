@@ -1,27 +1,40 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-    const Project = sequelize.define('project', 
+  const Project = sequelize.define(
+    'project',
     {
-        projectName: DataTypes.STRING,
-        builtUpArea: DataTypes.INTEGER,
-        aboveGroundFloor: DataTypes.INTEGER,
-        belowGroundFloor: DataTypes.INTEGER,
-        floorFinishingType: DataTypes.STRING,
-        carpentryAndJoinery: DataTypes.STRING,
-        roofingMaterial: DataTypes.STRING,
-        HVACSystem: DataTypes.STRING,
-        fireProtectionSystem: DataTypes.STRING,
-        buildingType: DataTypes.STRING,
-        sanitaryFixtures: DataTypes.STRING,
-        electricalMaterial: DataTypes.STRING,
-        costEstimate: DataTypes.INTEGER,
-        createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE,
-        userId: DataTypes.INTEGER
+      projectName: DataTypes.STRING,
+      builtUpArea: DataTypes.INTEGER,
+      aboveGroundFloor: DataTypes.INTEGER,
+      belowGroundFloor: DataTypes.INTEGER,
+      floorFinishingType: DataTypes.STRING,
+      carpentryAndJoinery: DataTypes.STRING,
+      roofingMaterial: DataTypes.STRING,
+      HVACSystem: DataTypes.STRING,
+      fireProtectionSystem: DataTypes.STRING,
+      buildingType: DataTypes.STRING,
+      sanitaryFixtures: DataTypes.STRING,
+      electricalMaterial: DataTypes.STRING,
+      costEstimate: DataTypes.INTEGER,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+      userId: DataTypes.INTEGER
     },
     {
-        freezeTableName: true
-    });
-    return Project;
+      freezeTableName: true,
+      // Define the update function to update a project
+      updateProject: async function (values, options) {
+        try {
+          await this.update(values, options);
+          return true;
+        } catch (error) {
+          console.error('Error updating project:', error);
+          return false;
+        }
+      }
+    }
+  );
+
+  return Project;
 };
