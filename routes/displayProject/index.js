@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+const { project } = require('../../controller');
 
 router.get('/', (req, res) => {
   const projectName = req.query['projectName'];
@@ -17,5 +18,12 @@ router.get('/', (req, res) => {
       res.status(500).send('Error retrieving API data');
     });
 });
+
+router.post('/', (req, res) => {
+  const userId = req.session.userId; // Retrieve the userId from the session
+  project.updateProject(req, res, userId); // Call the updateProject function and pass the userId
+});
+
+
 
 module.exports = router;

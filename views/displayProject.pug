@@ -25,7 +25,7 @@ html
             a(href='/createUser', class='myButton2') My Projects
 
   .container
-    form.main(action='/mainForm', method='POST', onsubmit='return validateForm()')
+    form.main(action='/displayProject', method='POST', onsubmit='return validateForm()')
       h1 Cost Estimate
       label(for='project-name') Project Name:
       input#project-name(type='text', name='projectName', value=data[0].projectName, required)
@@ -73,7 +73,7 @@ html
       br
 
       label(for='hvac-system') Is There HVAC System:
-      select#HVAC System(name='HVACSystem', required)
+      select#hvac-system(name='HVACSystem', required)
         option(value='Yes', selected=data[0].HVACSystem==='Yes') Yes
         option(value='No', selected=data[0].HVACSystem==='No') No
       br
@@ -107,4 +107,4 @@ html
         option(value='best', selected=data[0].electricalMaterial==='best') Best
       br
 
-      button(type='submit', value='mainForm') Submit
+      button(type='submit', value='displayProject') Submit

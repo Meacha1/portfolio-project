@@ -33,7 +33,7 @@ const calculateTotalMaterialCost = (reqBody) => {
         cement: 16,
         sand: 12.5,
         aggregate: 7.5,
-        steel: 24.5,
+        steel: 26,
         HCB: 4.5,
         paint: 4,
         tile: 7,
