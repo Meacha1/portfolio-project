@@ -1,4 +1,5 @@
 const { models: { User } } = require('../models');
+const nodemailer = require('nodemailer');
 
 module.exports = {
     login: async (req, res) => {
@@ -27,7 +28,7 @@ module.exports = {
                     res.send('Error retrieving user projects');
                   }
             } else {
-                res.send("Wrong password!")
+                res.render('sorry0');
             }
         } else {
             res.send("Not added to the database!")
@@ -52,7 +53,57 @@ module.exports = {
         } else {
         res.send("Not added to the database!")
     }
-},
+}, forgetPassword: async (req, res) => {
+    if (req.body.email) {
+      const { email } = req.body;
+      const user = await User.findOne({ where: { email } });
+      if (user) {
+        const password = user.password;
+        const username = user.username;
+  
+        // Create a Nodemailer transporter
+        const transporter = nodemailer.createTransport({
+          service: 'Gmail', // Specify your email service provider (e.g., Gmail, Yahoo)
+          auth: {
+            user: 'meachattd@gmail.com', // Enter your email address
+            pass: 'uvuefizmrjtwmbnd', // Enter your email password or app password
+          },
+        });
+        // Define the email content
+        const mailOptions = {
+            from: 'meachattd@gmail.com',
+            to: email,
+            subject: 'Password Recovery',
+            html: `
+              <div style="font-family: Arial, sans-serif; color: #333;">
+                <h2>Hello, ${username}!</h2>
+                <p>You have requested your password for our cost estimation website.</p>
+                <p>Your password is: <strong>${password}</strong></p>
+                <p>If you did not initiate this password recovery request, please contact our support team immediately.</p>
+                <br>
+                <p>Thank you!</p>
+                <p>The Cost Estimation Team</p>
+              </div>
+            `,
+          };
+  
+        // Send the email
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+            res.render('error'); // Render an error page if sending email fails
+          } else {
+            console.log('Email sent: ' + info.response);
+            res.render('success'); // Render a success page after sending the email
+          }
+        });
+      } else {
+        res.render('sorry2');  // Render a sorry page if the email address is not in the database
+      }
+    } else {
+        res.send('Email is required');
+        }
+  },
 
 // displyProject: async (req, res) => {
 
