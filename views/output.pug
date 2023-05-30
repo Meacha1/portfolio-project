@@ -17,24 +17,26 @@
 			</ul>
 			<ul>
 				<li><a href="/logout" class="myButton">Logout</a></li>
-				<li><a href="/createUser" class="myButton2">Create Account</a></li>
 			</ul>
 		</nav>
 	</header>
-	<h1>Cost Estimate</h1>
-	<p>Project Name: #{ projectName } </p>
-	<p>The area is: #{area} and the cost estimate is: #{costEstimate}</p>
-	<p>Built-up Area: #{ builtUpArea } sqm</p>
-	<p>Above Ground Floor: #{aboveGroundFloor} floors</p>
-	<p>Below Ground Floor: #{belowGroundFloor} floors</p>
-	<p>Floor Finishing Type: #{floorFinishingType} </p>
-	<p>Carpentry And Joinery: #{carpentryAndJoinery}</p>
-	<p>Roofing Material: #{roofingMaterial} </p>
-	<p>HVAC System: #{HVACSystem}</p>
-	<p>Fire Protection System: #{fireProtectionSystem}</p>
-	<p>Building Type: #{buildingType}</p>
-	<p>Sanitary Fixtures Quality Grade: #{sanitaryFixtures}</p>
-	<p>Electrical Materials Quality Grade: #{electricalMaterial}</p>
+	<div class="projectinfo">
+		<h1>Project information</h1>
+		<p><b>Project Name</b>: #{ projectName } </p>
+		<p><b>The floor area sum is</b>: #{area} m&sup2</p>
+		<p><b>The project Cost Estimation is</b>: #{costEstimate} ETB</p>
+		<p><b>Built-up Area</b>: #{ builtUpArea } sqm</p>
+		<p><b>Number Of Floors Above Ground Floor</b>: #{aboveGroundFloor} floors</p>
+		<p><b>Number Of Floors Below Ground Floor</b>: #{belowGroundFloor} floors</p>
+		<p><b>Floor Finishing Type</b>: #{floorFinishingType} </p>
+		<p><b>Carpentry And Joinery</b>: #{carpentryAndJoinery}</p>
+		<p><b>Roofing Material</b>: #{roofingMaterial} </p>
+		<p><b>HVAC System</b>: #{HVACSystem}</p>
+		<p><b>Fire Protection System</b>: #{fireProtectionSystem}</p>
+		<p><b>Building Type</b>: #{buildingType}</p>
+		<p><b>Sanitary Fixtures Quality Grade</b>: #{sanitaryFixtures}</p>
+		<p><b>Electrical Materials Quality Grade</b>: #{electricalMaterial}</p>
+	</div>
 </body>
 <footer>
 	<p>&copy; 2023 Building Cost Estimation</p>

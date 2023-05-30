@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const db = require('./models');
+const readDataFromExcel = require('./webScraping/index');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');  //Make sure to add the express-session middleware before initializing Passport.js
 const passport = require('passport');
@@ -71,6 +72,9 @@ app.use(express.urlencoded({ extended: true }));  // very important to put this 
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
+
+readDataFromExcel();
+
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/login',login);

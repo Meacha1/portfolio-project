@@ -18,11 +18,8 @@ html
           li
             a(href='#contact') Contact
         ul
-          li Hello, #{username}
           li
             a(href='/logout', class='myButton') Logout
-          li
-            a(href='/createUser', class='myButton2') My Projects
 
   .container
     form.main(action='/displayProject', method='POST', onsubmit='return validateForm()')
@@ -108,3 +105,5 @@ html
       br
 
       button(type='submit', value='displayProject') Submit
+    footer
+      p &copy; 2023 Building Cost Estimation

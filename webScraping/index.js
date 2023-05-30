@@ -73,7 +73,9 @@ async function readDataFromExcel() {
 }
 
 // Schedule the Excel reading function to run once a day at a specific time (e.g., 8:00 AM)
-cron.schedule('*/10 * * * * *', () => {
+cron.schedule('0 8 * * *', () => {
   console.log('Running the Excel reading function...');
   readDataFromExcel();
 });
+
+module.exports = readDataFromExcel; // exports the function readDataFromExcel will make all the functions available to other files that require this file

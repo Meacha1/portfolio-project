@@ -28,7 +28,7 @@ module.exports = {
                     res.send('Error retrieving user projects');
                   }
             } else {
-                res.render('sorry0');
+                res.render('sorry0');   // if the user is not found in the database
             }
         } else {
             res.send("Not added to the database!")
@@ -42,10 +42,10 @@ module.exports = {
              req.body.password.length >= 8
              ) {
             const { email, username, password, password2 } = req.body;
-            const user = await User.findOne({ where: { email, username } });
+            const user = await User.findOne({ where: { email } });
             
             if (user) {
-                res.render('sorry');
+                res.render('sorry');   // if the user is already in the database
             } else {
             await User.create({ email, username, password });
             res.render('congratulationsUser', { username });
@@ -63,10 +63,10 @@ module.exports = {
   
         // Create a Nodemailer transporter
         const transporter = nodemailer.createTransport({
-          service: 'Gmail', // Specify your email service provider (e.g., Gmail, Yahoo)
+          service: 'Gmail', 
           auth: {
-            user: 'meachattd@gmail.com', // Enter your email address
-            pass: 'uvuefizmrjtwmbnd', // Enter your email password or app password
+            user: 'meachattd@gmail.com', 
+            pass: 'uvuefizmrjtwmbnd', // my app password
           },
         });
         // Define the email content
@@ -104,23 +104,4 @@ module.exports = {
         res.send('Email is required');
         }
   },
-
-// displyProject: async (req, res) => {
-
-//             try {
-//                 const response = await fetch(`http://localhost:4004/api/projects/${ projectName }`);
-//                 if (response.ok) {
-//                   const projects = await response.json();
-//                   const projectnames = projects.map((project) => project.projectName);
-//                   console.log(`my projects are: ${projectnames}`);
-//                   res.render('mainForm', { username, projectnames });
-//                 } else {
-//                   console.error('Error retrieving user projects:', response.status);
-//                   res.send('Error retrieving user projects');
-//                 }
-//               } catch (error) {
-//                 console.error('Error retrieving user projects:', error);
-//                 res.send('Error retrieving user projects');
-//               }
-//         }
 };
