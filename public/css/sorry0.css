@@ -111,11 +111,10 @@ h1 {
     text-align: center;
 }
 
-
 footer {
     background-color: #333;
     color: #fff;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     position: fixed;
     left: 0;
@@ -140,21 +139,21 @@ footer a {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:20px;
+	font-size:15px;
 	font-weight:bold;
-	padding:13px 32px;
+	padding:10px 32px;
 	text-decoration:none;
 }
 
 .myButton2 {
-	background-color:#070433;
+	background-color:#080808;
 	border-radius:15px;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:20px;
+	font-size:15px;
 	font-weight:bold;
-	padding:13px 32px;
+	padding:10px 20px;
 	text-decoration:none;
 }
