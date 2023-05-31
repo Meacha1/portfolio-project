@@ -344,21 +344,26 @@ div.step1, div.step2, div.step3 {
   }
 
 #contact > div {
-    padding: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 20px;
 }
   
 #contact > div > div:nth-child(1) > img {
-    height: 450px; /* adjust the size as needed */
-    padding: 0;
+    height: 400px; /* adjust the size as needed */
+    width: 350px;
+    padding: 0px;
 }
 #contact > div > div:nth-child(2) > img {
-    height: 450px /* adjust the size as needed */
+    height: 400px; /* adjust the size as needed */
+    width: 350px;
+    padding: 0px;
 }
 #contact > div > div:nth-child(3) > img {
-    height: 450px /* adjust the size as needed */
+    height: 400px; /* adjust the size as needed */
+    width: 350px;
+    padding: 0px;
 } 
 #contact-info {
     position: absolute;
@@ -422,7 +427,7 @@ div.step1, div.step2, div.step3 {
 
 #contact > div > div:nth-child(*) {
     width: 25%;
-    padding-bottom: 0;
+    padding-bottom: 0px 10px 0px 10px;
 }
 
 #contact-info > h3 {
@@ -448,7 +453,7 @@ div.step1, div.step2, div.step3 {
 }
 
 #contact-info > a > img, #contact-info1 > a > img, #contact-info2 > a > img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: none;
 }
