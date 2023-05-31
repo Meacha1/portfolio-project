@@ -21,7 +21,7 @@ header nav {
     border-bottom: 8px solid #070505;}
 
 header h1 {
-	font-size: 30px;
+	font-size: 25px;
     margin-right: 45px;
 }
 
@@ -29,7 +29,7 @@ header nav ul {
     display: flex;
     align-items: center;
 	list-style: none;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 header nav ul li {
@@ -38,7 +38,7 @@ header nav ul li {
 }
 
 header nav ul li:last-child {
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 header nav ul li a {
@@ -47,6 +47,9 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
+	text-decoration: underline;
+}
+body .myButton3:hover {
 	text-decoration: underline;
 }
 
@@ -66,10 +69,14 @@ body {
 }
 
 .container {
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
 	font-size: x-large;
     align-items: center;
+}
+
+a.myButton3 {
+    margin-left: 40%;
 }
 
 
@@ -84,9 +91,8 @@ body {
 
 .video img {
     padding-left: 100px;
-    width: 70%;
+    width: 400px !important;
 }
-
 
 
 h1 {
@@ -138,8 +144,21 @@ footer a {
 	font-weight:bold;
 	padding:10px 20px;
 	text-decoration:none;
+    margin: auto;
 }
-
+.myButton3 {
+	background-color:#16b9b9;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 40px;
+	text-decoration:none;
+    margin: auto;
+}
 .row {
     display: flex;
     flex-direction: row;
@@ -148,24 +167,31 @@ footer a {
 }
 
 .col-md-4 {
-    
     width: 30%;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
 }
 
+div.card {
+    height:auto !important;
+}
+
 .card-text{
     width: 100%;
-    height:max-content;
+    height: auto;
     padding: 10px;
     border: #16b9b9 1px solid;
     border-radius: 5px;
+    justify-content: last baseline;
+}
+p.card-text{
+    font-size: medium;
 }
 
 .card-title {
     text-align: center;
-    font-size: large;
+    font-size: 15px;
 }
 
 .forlist {
@@ -187,6 +213,7 @@ footer a {
 
 .forlist div {
     text-align: center;
+    padding: 10px;
     text-decoration: none;
 }
 
@@ -196,19 +223,51 @@ footer a {
     font-size: large;
 }
 
-
 .forlist img {
-    width: 50px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+.image-container {
+    display: inline-block; /* or any other appropriate display value */
+    width: 60px;
+    height: 60px;
     padding: 10px;
     border-radius: 50%;
     border: 1px solid #16b9b9;
-    
-  }
+    overflow: hidden;
+}
+.steps h1 {
+    font-size: 30px;
+}
+
+.stepslist a {
+    font-size: 26px;
+    text-decoration: none;
+    color: #020202;
+}
+
+ .stepslist h1:hover {
+    text-decoration: underline;
+}
+
+.step2 .how{
+    width: 70%;
+}
+
+div.how h5 {
+   text-align: justify;
+   margin-top: 5px;
+   font-weight: normal;
+   font-size: medium;
+}
+
+
 .stepslist div img {
-    width: 600px;
+    width: 400px;
     padding: 5px;
-    border: 1px solid #16b9b9;
+    border: 5px solid #16b9b9;
     border-radius: 10px;
   }
 
@@ -232,18 +291,15 @@ div .how {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 0px;
-    font-size:larger;
 }
 div.step1, div.step2, div.step3 {
-    border-bottom: 1px solid #9ae9f3;
-    padding: 40px;
+    padding: 60px;
 }
 .abouteUs {
     display: flex;
     flex-direction: column;
 
 }
-
 
 
 .abouteUs {
@@ -284,27 +340,115 @@ div.step1, div.step2, div.step3 {
 .contact .contactlist .contact-card {
     position: relative;
     display: inline-block;
+    padding-bottom: 0;
   }
+
+#contact > div {
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
   
-.profile-picture {
-    width: 400px; /* adjust the size as needed */
-    height: auto;
-  }
-  
-  div.contact-info {
+#contact > div > div:nth-child(1) > img {
+    height: 450px; /* adjust the size as needed */
+    padding: 0;
+}
+#contact > div > div:nth-child(2) > img {
+    height: 450px /* adjust the size as needed */
+}
+#contact > div > div:nth-child(3) > img {
+    height: 450px /* adjust the size as needed */
+} 
+#contact-info {
     position: absolute;
+    border-radius: 8px;
+    padding: 0%;
     bottom: 0; /* initially hidden at the bottom */
     left: 0;
     width: 100%;
     height: 0;
-    background-color: rgb(0, 0, 0, 0.9);
+    background-color: rgba(70, 68, 68, 0.95);
     color: white;
     overflow: hidden !important;
     transition: height 0.9s ease-in-out;
-  }
+    text-align: left;
+}
   
- .contact .contact-card:hover .contact-info {
+.contact .contact-card:hover #contact-info {
     height: 100%; /* slide the contact info up to cover the picture */
-    padding: 0px;
-  }
+}
+#contact-info1 {
+    position: absolute;
+    border-radius: 8px;
+    padding: 0%;
+    bottom: 0; /* initially hidden at the bottom */
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(70, 68, 68, 0.95);
+    color: white;
+    overflow: hidden !important;
+    transition: height 0.9s ease-in-out;
+    text-align: left;
+}
   
+.contact .contact-card:hover #contact-info1 {
+    height: 100%; /* slide the contact info up to cover the picture */
+}
+#contact-info2 {
+    position: absolute;
+    border-radius: 8px;
+    padding: 0%;
+    bottom: 0; /* initially hidden at the bottom */
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(70, 68, 68, 0.95);
+    color: white;
+    overflow: hidden !important;
+    transition: height 0.9s ease-in-out;
+    text-align: left;
+}
+  
+.contact .contact-card:hover #contact-info2 {
+    height: 100%; /* slide the contact info up to cover the picture */
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact > div > div:nth-child(*) {
+    width: 25%;
+    padding-bottom: 0;
+}
+
+#contact-info > h3 {
+    padding: 15px 0px 15px 15px;
+}
+#contact-info > p {
+    padding: 0px 0px 0px 15px;
+    line-height: 10px;
+}
+#contact-info1 > h3 {
+    padding: 15px 0px 15px 15px;
+}
+#contact-info1 > p {
+    padding: 0px 0px 0px 15px;
+    line-height: 10px;
+}
+#contact-info2 > h3 {
+    padding: 15px 0px 15px 15px;
+}
+#contact-info2 > p {
+    padding: 0px 0px 0px 15px;
+    line-height: 10px;
+}
+
+#contact-info > a > img, #contact-info1 > a > img, #contact-info2 > a > img {
+    width: 40px;
+    height: 40px;
+    border: none;
+}
