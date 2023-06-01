@@ -14,6 +14,7 @@ const app1 = require('./algorism/api/material_api');
 const app2 = require('./algorism/api/project_api');
 const port1 = 4003;
 const port2 = 4004;
+const port = 3000;
 
 const users = require('./routes/users');
 const posts = require('./routes/posts');
@@ -92,14 +93,14 @@ app.get('/', (req, res) => {
 });
 
 // Start the api app on port 4003
-app1.listen(port1, () => {
+app1.listen(process.env.PORT || port1, () => {
   console.log(`App 1 running on port ${port1}`);
 });
 
-app2.listen(port2, () => {
+app2.listen(process.env.PORT || port2, () => {
   console.log(`App 2 running on port ${port2}`);
 });
 
-app.listen(3000, () => {
-    console.log('Example app listening on port 3000!');
+app.listen(process.env.PORT || port, () => {
+    console.log('Server is running on port 3000');
 });
