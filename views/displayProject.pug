@@ -10,7 +10,6 @@ html
         ul
           a(href='/')
             img(src='../images/logo.png', alt='logo')
-          h1 MEE Cost Estimation
           li
             a(href='/') Home
           li
@@ -23,9 +22,9 @@ html
 
   .container
     form.main(action='/displayProject', method='POST', onsubmit='return validateForm()')
-      h1 Cost Estimate
+      h1 Your Project Information
       label(for='project-name') Project Name:
-      input#project-name(type='text', name='projectName', value=data[0].projectName, required)
+      input#project-name(type='text', name='projectName', value=data[0].projectName, required readonly)
       br
 
       label(for='built-up-area') Built-up Area in m2:

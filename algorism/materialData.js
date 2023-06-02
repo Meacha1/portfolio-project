@@ -1,3 +1,5 @@
+const fetch = require('isomorphic-fetch');
+
 async function fetchDataFromDatabase(apiUrl) {
   const response = await fetch(apiUrl);
   const data = await response.json();

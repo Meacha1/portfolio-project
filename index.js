@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const setupDatabase = require('./const_estimator_db');
+setupDatabase();
 const cors = require('cors');
 const path = require('path');
 const db = require('./models');
@@ -9,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');  //Make sure to add the express-session middleware before initializing Passport.js
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const User = require('./models/user');
 // Import the my api file
 const app1 = require('./algorism/api/material_api');
 const app2 = require('./algorism/api/project_api');

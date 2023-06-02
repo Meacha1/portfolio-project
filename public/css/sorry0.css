@@ -6,9 +6,9 @@ header {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 header img {
-    width: 100px;
+    width: fit-content;
     height: 100px;
-    margin-right: 20px;
+    margin-right: 80px;
 }
 
 header nav {

@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const dbConfig = require("../../config/db-config.js");
 
 const app2 = express();
 const port2 = 4004;
@@ -10,10 +11,10 @@ app2.use(cors()); // Enable CORS for all routes
 // Create a MySQL pool
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'const_estimator_db'
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DATABASE
 });
 
 // Define the materials route

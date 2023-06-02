@@ -1,13 +1,14 @@
 const cron = require('node-cron');
 const mysql = require('mysql');
 const ExcelJS = require('exceljs');
+const dbConfig = require("../config/db-config.js");
 
 // MySQL connection configuration
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'const_estimator_db'
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DATABASE
 });
 
 // Function to insert data into MySQL
