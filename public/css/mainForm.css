@@ -165,3 +165,14 @@ footer a {
 	padding:10px 20px;
 	text-decoration:none;
 }
+
+
+body > div.container > div.projects > ul > li > * {
+    color: #132957;
+    text-decoration: none;
+  }
+
+body > div.container > div.projects > ul > li > *:hover {
+    color: #16b9b9;
+    text-decoration: underline;
+  }
