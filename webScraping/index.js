@@ -1,41 +1,35 @@
 const cron = require('node-cron');
-const mysql = require('mysql');
 const ExcelJS = require('exceljs');
-const dbConfig = require("../config/db-config.js");
+const { Sequelize } = require('sequelize');
+const dbConfig = require('../config/db-config.js');
+const MaterialPriceModel = require('../models/materialPrice.js');
 
-// MySQL connection configuration
-const connection = mysql.createConnection({
+// Create a new Sequelize instance
+const sequelize = new Sequelize(dbConfig.DATABASE, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DATABASE
+  dialect: dbConfig.DIALECT
 });
 
-// Function to insert data into MySQL
-function insertDataToMySQL(item, price) {
-  const selectQuery = `SELECT * FROM materialprice WHERE item = '${item}'`;
-  connection.query(selectQuery, (error, results, fields) => {
-    if (error) throw error;
+// Define the MaterialPrice model
+const MaterialPrice = MaterialPriceModel(sequelize, Sequelize);
 
-    // Check if the item exists in the database
-    if (results.length > 0) {
-      // Item exists, perform update
-      const updateQuery = `UPDATE materialprice SET price = ${price} WHERE item = '${item}'`;
-      connection.query(updateQuery, (error, results, fields) => {
-        if (error) throw error;
-        console.log('Data updated successfully');
-      });
+// Function to insert or update data using Sequelize
+async function insertOrUpdateData(item, price) {
+  try {
+    const [result] = await MaterialPrice.findOrCreate({
+      where: { item },
+      defaults: { price }
+    });
+
+    if (result) {
+      console.log('Data inserted or updated successfully');
     } else {
-      // Item doesn't exist, perform insert
-      const insertQuery = `INSERT INTO materialprice (item, price) VALUES ('${item}', ${price})`;
-      connection.query(insertQuery, (error, results, fields) => {
-        if (error) throw error;
-        console.log('Data inserted successfully');
-      });
+      console.log('Data not inserted or updated');
     }
-  });
+  } catch (error) {
+    console.error('Error inserting or updating data:', error);
+  }
 }
-
 
 // Function to read data from Excel file
 async function readDataFromExcel() {
@@ -48,19 +42,19 @@ async function readDataFromExcel() {
       if (rowNumber > 1) {
         const item = row.getCell(1).value;
         const priceCell = row.getCell(2);
-    
+
         // Retrieve the value as a string
         const price = priceCell.text;
-    
+
         console.log(`Row ${rowNumber}: item=${item}, price=${price}`);
-    
-        // Parse the price as a float
-        const priceValue = parseFloat(price);
-    
+
+        // Parse the price as an integer
+        const priceValue = parseInt(price);
+
         // Check if the values are valid
         if (item && !isNaN(priceValue)) {
-          // Insert the data into MySQL
-          insertDataToMySQL(item, priceValue);
+          // Insert or update the data using Sequelize
+          insertOrUpdateData(item, priceValue);
         } else {
           console.warn(`Skipping invalid row in Excel: Row ${rowNumber}`);
         }
@@ -79,4 +73,13 @@ cron.schedule('0 8 * * *', () => {
   readDataFromExcel();
 });
 
-module.exports = readDataFromExcel; // exports the function readDataFromExcel will make all the functions available to other files that require this file
+// Synchronize the Sequelize model with the database
+sequelize.sync()
+  .then(() => {
+    console.log('Sequelize synchronized with the database.');
+  })
+  .catch((error) => {
+    console.error('Error synchronizing Sequelize with the database:', error);
+  });
+
+module.exports = readDataFromExcel;
