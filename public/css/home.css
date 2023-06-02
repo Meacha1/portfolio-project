@@ -134,7 +134,8 @@ footer a {
 }
 
 .myButton2 {
-	background-color:#080808;
+	background-color:#102868;
+    text-align: center;
 	border-radius:15px;
 	display:inline-block;
 	cursor:pointer;
@@ -148,6 +149,7 @@ footer a {
 }
 .myButton3 {
 	background-color:#16b9b9;
+    text-align: center;
 	border-radius:15px;
 	display:inline-block;
 	cursor:pointer;

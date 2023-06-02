@@ -146,7 +146,8 @@ footer a {
 }
 
 .myButton2 {
-	background-color:#080808;
+    background-color:#102868;
+    text-align: center;
 	border-radius:15px;
 	display:inline-block;
 	cursor:pointer;

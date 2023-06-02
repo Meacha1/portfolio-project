@@ -62,11 +62,11 @@ body {
 }
 
 .projects {
-    background-color:#faf6f6;
+    background-color: #f0f7f6;
     padding-left: 10px;
     justify-content: center;
     width: 25%;
-    border: #333 1px solid;
+    border: #16b9b9 2px solid;
     border-radius: 15px;   
 }
 
@@ -153,7 +153,8 @@ footer a {
 }
 
 .myButton2 {
-	background-color:#080808;
+    background-color:#102868;
+    text-align: center;
 	border-radius:15px;
 	display:inline-block;
 	cursor:pointer;
