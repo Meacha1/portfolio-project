@@ -22,7 +22,7 @@ html
 
   .container
     form.main(action='/displayProject', method='POST', onsubmit='return validateForm()')
-      h1 Your Project Information
+      h1 My Project Information
       label(for='project-name') Project Name:
       input#project-name(type='text', name='projectName', value=data[0].projectName, required readonly)
       br

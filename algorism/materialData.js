@@ -1,4 +1,7 @@
 const fetch = require('isomorphic-fetch');
+const dbConfig = require('../config/db-config.js');
+
+const host = dbConfig.HOST;
 
 async function fetchDataFromDatabase(apiUrl) {
   const response = await fetch(apiUrl);
@@ -8,7 +11,7 @@ async function fetchDataFromDatabase(apiUrl) {
 
 // Define a function to fetch materials data from the database
 async function fetchMaterialsDataFromDatabase() {
-  const apiUrl = 'http://localhost:4003/api/materials';
+  const apiUrl = `http://${host}:4003/api/materials`;
   const materialsData = await fetchDataFromDatabase(apiUrl);
   return materialsData;
 }

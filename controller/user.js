@@ -1,5 +1,8 @@
 const { models: { User } } = require('../models');
 const nodemailer = require('nodemailer');
+const dbConfig = require('../config/db-config.js');
+
+const host = dbConfig.HOST;
 
 module.exports = {
     login: async (req, res) => {
@@ -11,9 +14,10 @@ module.exports = {
                 const username = user.username;
                 console.log(`my user id is: ${user.id}`);
 
+                
                 // Fetch projects from the database
                 try {
-                    const response = await fetch(`http://localhost:4004/api/projects/${user.id}`);
+                    const response = await fetch(`http://${host}:4004/api/projects/${user.id}`);
                     if (response.ok) {
                       const projects = await response.json();
                       const projectnames = projects.map((project) => project.projectName);

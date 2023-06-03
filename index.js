@@ -11,8 +11,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 
-const users = require('./routes/users');
-const posts = require('./routes/posts');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const createUser = require('./routes/createUser');
@@ -65,8 +63,6 @@ app.set('views', path.join(__dirname, 'views'));
 })();
 
 // Routes
-app.use('/users', users);
-app.use('/posts', posts);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/createUser', createUser);
@@ -89,8 +85,8 @@ app.listen(port, () => {
 const app1 = require('./algorism/api/material_api');
 const app2 = require('./algorism/api/project_api');
 
-const port1 = 4003;
-const port2 = 4004;
+const port1 = process.env.PORT || 4003;
+const port2 = process.env.PORT || 4004;
 
 (async () => {
   try {
