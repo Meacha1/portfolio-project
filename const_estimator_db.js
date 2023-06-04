@@ -1,11 +1,12 @@
 const mysql = require('mysql');
+const dbConfig = require("./config/db-config.js");
 
 const setupDatabase = () => {
   const connection = mysql.createConnection({
-    host: 'localhost', // MySQL server host
-    port:3306, // MySQL server
-    user: 'root', // MySQL username
-    password: 'password', // MySQL password
+    host: dbConfig.HOST,
+    user: dbConfig.USER,
+    password: dbConfig.PASSWORD,
+    database: dbConfig.DATABASE
   });
 
   connection.connect((err) => {
@@ -16,7 +17,7 @@ const setupDatabase = () => {
     console.log('Connected to MySQL server');
 
     // Create the database
-    connection.query('CREATE DATABASE IF NOT EXISTS const_estimator_db', (err) => {
+    connection.query(`CREATE DATABASE IF NOT EXISTS ${database}`, (err) => {
       if (err) {
         console.error('Error creating MySQL database:', err);
         return;
