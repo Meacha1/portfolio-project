@@ -32,7 +32,7 @@ const sessionStore = new MySQLStore({ // Create the session store
 });
 app.use(session({
   store: sessionStore,
-  secret: 'your-secret-key',
+  secret: 'meacha123',
   resave: false,
   saveUninitialized: false
 }));
