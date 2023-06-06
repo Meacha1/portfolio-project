@@ -7,9 +7,13 @@ const db = require('./models');
 const readDataFromExcel = require('./webScraping/index');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+const mysql = require('mysql');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
+const dbConfig = require("./config/db-config.js");
+const Session = require('./models/session'); 
 
 const login = require('./routes/login');
 const logout = require('./routes/logout');
@@ -19,11 +23,20 @@ const displayProject = require('./routes/displayProject');
 const forgetPassword = require('./routes/forgetPassword');
 
 // Middleware setup
+const sessionStore = new MySQLStore({ // Create the session store
+  host: dbConfig.HOST,
+  port: dbConfig.PORT,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DATABASE,
+});
 app.use(session({
-  secret: '123456789',
+  store: sessionStore,
+  secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());

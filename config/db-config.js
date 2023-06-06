@@ -3,6 +3,6 @@ module.exports = {
     USER: 'root',
     PORT: 3306,
     PASSWORD: 'password',
-    DATABASE: 'cost_estimator_d',
+    DATABASE: 'const_estimator_db',
     DIALECT: 'mysql'
 }

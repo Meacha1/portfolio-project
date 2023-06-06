@@ -9,6 +9,7 @@ const sequelize = new Sequelize(dbConfig.DATABASE, dbConfig.USER, dbConfig.PASSW
 const db = {};
 db.sequelize = sequelize;
 db.models = {};
+db.models.Session = require('./session.js')(sequelize, Sequelize.DataTypes)
 db.models.User = require('./user')(sequelize, Sequelize.DataTypes);
 db.models.Project = require('./project')(sequelize, Sequelize.DataTypes);
 db.models.MaterialPrice = require('./materialPrice')(sequelize, Sequelize.DataTypes);
