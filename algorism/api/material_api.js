@@ -9,6 +9,7 @@ const port = 4003;
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: dbConfig.HOST,
+  port: dbConfig.PORT,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DATABASE

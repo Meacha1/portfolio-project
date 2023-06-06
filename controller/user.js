@@ -56,9 +56,9 @@ module.exports = {
             }
         } else {
         res.send("Not added to the database!")
-    }
-}, forgetPassword: async (req, res) => {
-    if (req.body.email) {
+      }
+    }, forgetPassword: async (req, res) => {
+      if (req.body.email) {
       const { email } = req.body;
       const user = await User.findOne({ where: { email } });
       if (user) {
