@@ -61,5 +61,5 @@ Please adhere to the project's coding style, maintain clear commit messages, and
 For any questions, feedback, or inquiries, please feel free to reach out to us:
 
 - Meacha Tafa: meachattd@gmail.com
-- Elphaz Bekele: jane.smith@example.com
+- Elphaz Bekele: elphazshiferaw@gmail.com
 - Eyob Woldu: michael.johnson@example.com
