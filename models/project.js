@@ -24,15 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       freezeTableName: true,
       // Define the update function to update a project
-      updateProject: async function (values, options) {
-        try {
-          await this.update(values, options);
-          return true;
-        } catch (error) {
-          console.error('Error updating project:', error);
-          return false;
-        }
-      }
     }
   );
 
