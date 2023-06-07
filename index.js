@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const setupDatabase = require('./const_estimator_db');
+const setupDatabase = require('./cost_estimator_db');
 const cors = require('cors');
 const path = require('path');
-const db = require('./models');
+const db = require('./models/index');
 const readDataFromExcel = require('./webScraping/index');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -13,7 +13,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const dbConfig = require("./config/db-config.js");
-const Session = require('./models/session'); 
+const Session = require('./models/session');
 
 const login = require('./routes/login');
 const logout = require('./routes/logout');
@@ -23,7 +23,7 @@ const displayProject = require('./routes/displayProject');
 const forgetPassword = require('./routes/forgetPassword');
 
 // Middleware setup
-const sessionStore = new MySQLStore({ // Create the session store
+const sessionStore = new MySQLStore({
   host: dbConfig.HOST,
   port: dbConfig.PORT,
   user: dbConfig.USER,
@@ -65,16 +65,6 @@ passport.use(new LocalStrategy({
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// Database synchronization
-(async () => {
-  try {
-    await db.sequelize.sync();
-    console.log('Database synchronized successfully.');
-  } catch (error) {
-    console.error('Failed to sync database:', error);
-  }
-})();
-
 // Routes
 app.use('/login', login);
 app.use('/logout', logout);
@@ -90,9 +80,21 @@ app.get('/', (req, res) => {
 
 // Start the server
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+
+// Database synchronization
+(async () => {
+  try {
+    await db.sequelize.sync();
+    console.log('Database synchronized successfully.');
+    
+    // Start the server
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Failed to sync database:', error);
+  }
+})();
 
 // APIs
 const app1 = require('./algorism/api/material_api');
@@ -101,15 +103,13 @@ const app2 = require('./algorism/api/project_api');
 const port1 = process.env.PORT || 4003;
 const port2 = process.env.PORT || 4004;
 
-(async () => {
-  try {
-    await Promise.all([app1.listen(port1), app2.listen(port2)]);
-    console.log(`App 1 running on port ${port1}`);
-    console.log(`App 2 running on port ${port2}`);
-  } catch (error) {
-    console.error('Failed to start API servers:', error);
-  }
-})();
+app1.listen(port1, () => {
+  console.log(`App 1 running on port ${port1}`);
+});
+
+app2.listen(port2, () => {
+  console.log(`App 2 running on port ${port2}`);
+});
 
 // Read data from Excel
 readDataFromExcel();

@@ -62,4 +62,4 @@ For any questions, feedback, or inquiries, please feel free to reach out to us:
 
 - Meacha Tafa: meachattd@gmail.com
 - Elphaz Bekele: elphazshiferaw@gmail.com
-- Eyob Woldu: michael.johnson@example.com
+- Eyob Wolde: Jobzadedany@gmail.com

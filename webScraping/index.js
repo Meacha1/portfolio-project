@@ -40,10 +40,11 @@ async function readDataFromExcel() {
     const worksheet = workbook.getWorksheet('Sheet1');
     worksheet.eachRow((row, rowNumber) => {
       if (rowNumber > 1) {
-        const item = row.getCell(1).value;
+        const itemCell = row.getCell(1);
         const priceCell = row.getCell(2);
 
-        // Retrieve the value as a string
+        // Retrieve the values as strings
+        const item = itemCell.text.toString();
         const price = priceCell.text;
 
         console.log(`Row ${rowNumber}: item=${item}, price=${price}`);

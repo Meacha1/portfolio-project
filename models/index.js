@@ -14,3 +14,8 @@ db.models.User = require('./user')(sequelize, Sequelize.DataTypes);
 db.models.Project = require('./project')(sequelize, Sequelize.DataTypes);
 db.models.MaterialPrice = require('./materialPrice')(sequelize, Sequelize.DataTypes);
 module.exports = db;
+
+module.exports = {
+    sequelize,
+    models: db.models,
+  };

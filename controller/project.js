@@ -77,6 +77,24 @@ module.exports = {
 
       const formattedCostEstimate = costEstimate.toLocaleString();
 
+      const selectionMap = {
+        low: "Low-quality internal door with local material, no built-in cupboard, and cabinets",
+        low1: "Low-quality internal door, built-in cupboard, and cabinets with local material",
+        medium:  "Medium-quality internal door with local material no built-in cupboard, and cabinets",
+        medium1: "Medium-quality internal door, built-in cupboard, and cabinets with local material",
+        high: "High-quality internal door with imported material, no built-in cupboard, and cabinets",
+        high1: "High-quality internal door, built-in cupboard, and cabinets with imported material",
+        best: "Best-quality internal door with imported material no built-in cupboard, and cabinets",
+        best1: "Best-quality internal door, built-in cupboard, and cabinets with imported material",
+        porcelineLocal: "Porceline Local",
+        porcelineImported: "Porceline Imported",
+        ceramicLocal: "Ceramic Local",
+        ceramicImported: "Ceramic Imported",
+        graniteLocal: "Granite Local",
+        graniteImported: "Granite Imported",
+        marbleLocal: "Marble Local",
+      };
+
       res.render('output', {
         projectName,
         builtUpArea,
@@ -85,8 +103,8 @@ module.exports = {
         updatedAt,
         area,
         buildingType,
-        carpentryAndJoinery,
-        roofingMaterial,
+        carpentryAndJoinery: selectionMap[carpentryAndJoinery],
+        roofingMaterial: selectionMap[floorFinishingType],
         HVACSystem,
         aboveGroundFloor,
         belowGroundFloor,

@@ -18,7 +18,7 @@ function estimation(totalmaterialCost, reqBody) {
   
   // logic for roof type
   if (roofingMaterial == "Concerete Slab Roof") {
-    noOfFloorsAboveGround = noOfFloorsAboveGround + 0.4;   // considering the roof slabs steel and cements
+    noOfFloorsAboveGround = noOfFloorsAboveGround + 0.45;   // considering the roof slabs steel and cements
   }
   const grosArea = calculateArea(area, noOfFloorsAboveGround, noOfFloorsBelowGround);
   const totalCost = grosArea * costPerSquareMeter;

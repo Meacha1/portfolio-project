@@ -2,21 +2,20 @@ const express = require('express');
 const mysql = require('mysql');
 const dbConfig = require("../../config/db-config.js");
 
-const app = express();
-const port = 4003;
+const app1 = express();
+const port1 = 4003;
 
 // Create a MySQL pool
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: dbConfig.HOST,
-  port: dbConfig.PORT,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DATABASE
 });
 
 // Define the materials route
-app.get('/api/materials', (req, res) => {
+app1.get('/api/materials', (req, res) => {
   // Get a connection from the pool
   pool.getConnection((err, connection) => {
     if (err) {
@@ -25,7 +24,7 @@ app.get('/api/materials', (req, res) => {
     }
 
     // Define the SQL query
-    const query = 'SELECT * FROM materialprice';
+    const query = 'SELECT * FROM materialPrice';
 
     // Execute the query
     connection.query(query, (error, results) => {
@@ -43,4 +42,4 @@ app.get('/api/materials', (req, res) => {
   });
 });
 
-module.exports = app;
+module.exports = app1;
