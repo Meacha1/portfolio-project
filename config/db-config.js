@@ -4,5 +4,6 @@ module.exports = {
     PORT: 3306,
     PASSWORD: 'password',
     DATABASE: 'cost_estimator_db18',
-    DIALECT: 'mysql'
+    DIALECT: 'mysql',
+    APP_PORT: 3000
 }
