@@ -104,14 +104,14 @@ module.exports = {
         area,
         buildingType,
         carpentryAndJoinery: selectionMap[carpentryAndJoinery],
-        roofingMaterial: selectionMap[floorFinishingType],
+        roofingMaterial,
         HVACSystem,
         aboveGroundFloor,
         belowGroundFloor,
         buildingType,
         sanitaryFixtures,
         electricalMaterial,
-        floorFinishingType,
+        floorFinishingType: selectionMap[floorFinishingType],
         fireProtectionSystem
       });
     } else {

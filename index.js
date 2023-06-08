@@ -14,6 +14,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const dbConfig = require("./config/db-config.js");
 const Session = require('./models/session');
+require('dotenv').config();
+
 
 const login = require('./routes/login');
 const logout = require('./routes/logout');

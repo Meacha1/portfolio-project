@@ -89,9 +89,10 @@ a.myButton3 {
     border-radius: 5px;
 }
 
-.video img {
-    padding-left: 100px;
+.video-player {
+    margin-left: 100px;
     width: 400px !important;
+    border-radius: 8px;
 }
 
 
@@ -308,6 +309,26 @@ div.step1, div.step2, div.step3 {
     padding-top: 50px;
     background-color: #f0f7f6;
 }
+#abouteUs > p {
+    text-align: justify;
+    margin-top: 5px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-weight: normal;
+    font-size: medium;
+}
+
+#abouteUs > p:nth-child(6) > a {
+    text-align: justify;
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: medium;
+    color: #102868;
+}
+
+#abouteUs > p:nth-child(6) > a:hover {
+    text-decoration: underline;
+}
 
 .abouteUs .cards {
     padding-top: 50px;
@@ -353,19 +374,19 @@ div.step1, div.step2, div.step3 {
 }
   
 #contact > div > div:nth-child(1) > img {
-    height: 400px; /* adjust the size as needed */
-    width: 350px;
-    padding: 0px;
+    height: 350px; /* adjust the size as needed */
+    width: 300px;
+    padding: 10px;
 }
 #contact > div > div:nth-child(2) > img {
-    height: 400px; /* adjust the size as needed */
-    width: 350px;
-    padding: 0px;
+    height: 350px; /* adjust the size as needed */
+    width: 300px;
+    padding: 10px;
 }
 #contact > div > div:nth-child(3) > img {
-    height: 400px; /* adjust the size as needed */
-    width: 350px;
-    padding: 0px;
+    height: 350px; /* adjust the size as needed */
+    width: 300px;
+    padding: 10px;
 } 
 #contact-info {
     position: absolute;

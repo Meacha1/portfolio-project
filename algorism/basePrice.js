@@ -57,11 +57,11 @@ const calculateTotalMaterialCost = (reqBody) => {
 
       // applying the logic for number of floors
       if (numberOfFloors == 0) {
-        cement = cement * 0.9;
-        sand = sand * 0.9;
-        aggregate = aggregate * 0.9;
-        steel = steel * 0.8;
-        otherPercentage = otherPercentage - 5;     
+        cement = cement * 0.95;
+        sand = sand * 0.95;
+        aggregate = aggregate * 0.95;
+        steel = steel * 0.95;
+        otherPercentage = otherPercentage - 2;     
       }
 
       if (numberOfFloors > 4 && numberOfFloors <= 8) {

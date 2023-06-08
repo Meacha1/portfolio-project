@@ -52,7 +52,7 @@ module.exports = {
                 res.render('sorry');   // if the user is already in the database
             } else {
             await User.create({ email, username, password });
-            res.render('congratulationsUser', { username });
+            res.render('CongratulationsUser', { username });
             }
         } else {
         res.send("Not added to the database!")
