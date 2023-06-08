@@ -22,20 +22,16 @@ app1.get('/api/materials', (req, res) => {
       console.error('Error connecting to MySQL database:', err);
       return res.status(500).send('Error connecting to MySQL database');
     }
-
     // Define the SQL query
     const query = 'SELECT * FROM materialPrice';
-
     // Execute the query
     connection.query(query, (error, results) => {
       // Release the connection back to the pool
       connection.release();
-
       if (error) {
         console.error('Error executing MySQL query:', error);
         return res.status(500).send('Error executing MySQL query');
       }
-
       // Send the results back as JSON
       res.json(results);
     });
