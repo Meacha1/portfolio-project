@@ -86,13 +86,15 @@ a.myButton3 {
 }
 
 .video {
-    border-radius: 5px;
-}
 
+}
 .video-player {
     margin-left: 100px;
     width: 400px !important;
     border-radius: 8px;
+    padding: 3px;
+    border: #16b9b9 4px solid;
+    background-image: -moz-element();
 }
 
 

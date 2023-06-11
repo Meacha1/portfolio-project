@@ -3,9 +3,6 @@ const { materialsPromise } = require('./materialData');
 const { getMaterialPrices } = require('./materialPrices');
 
 
-// Sum of percentages
-
-
 // percentage other than material
 
 var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
@@ -24,7 +21,7 @@ const calculateTotalMaterialCost = (reqBody) => {
       var sand = 0.5376; // meter cube
       var aggregate = 0.41096; // meter cube
       var steel = 41.01075; // kg 43.01075
-      var HCB = 1.3; // no 17.3
+      var HCB = 17.3; // no 17.3
       var paint = 0.183; // liter
       var tile = 1.3; // meter square
 
@@ -246,7 +243,8 @@ const calculateTotalMaterialCost = (reqBody) => {
       
       var percentageSum = Object.values(percentage).reduce((a, b) => a + b, 0);
       var remainingPercent = 100 - percentageSum;
-        
+      
+      // calculate the material cost
       var materialCost = {
         cement: cement * getMaterialPrices().cementPrice,
         sand: sand * getMaterialPrices().sandPrice,
@@ -259,10 +257,10 @@ const calculateTotalMaterialCost = (reqBody) => {
 
       var materialCostSum = Object.values(materialCost).reduce((a, b) => a + b, 0);
       var remainingMaterialCost = materialCostSum * (remainingPercent / percentageSum);
-      var totalmaterialCost = (materialCostSum + remainingMaterialCost) * (100 / (100 - otherPercentage));
+      var totalCostPermeter = (materialCostSum + remainingMaterialCost) * (100 / (100 - otherPercentage));
 
 
-      resolve(totalmaterialCost);
+      resolve({ totalCostPermeter, cement, sand, aggregate, steel, HCB, paint, tile, paint});
     } catch (error) {
       reject(error);
     }

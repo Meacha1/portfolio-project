@@ -103,7 +103,7 @@ footer a {
 .projectinfo {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 10px;
     border: 1px solid rgb(146, 141, 141);
     border-radius: 10px;
 
@@ -111,5 +111,13 @@ footer a {
 
 .projectinfo p,h2 {
     padding-left: 25px;
+    padding-bottom: 0px;
     margin-right: auto;
+}
+body > div.projectinfo > h2 > b {
+    text-decoration: underline;
+}
+
+body > div.projectinfo > p {
+    
 }

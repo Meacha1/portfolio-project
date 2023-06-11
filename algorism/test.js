@@ -1,19 +1,16 @@
 const { calculateTotalMaterialCost } = require('./basePrice.js');
 
-function estimation(totalmaterialCost, reqBody) {
+
+function estimation(materialCostResult, reqBody) {
   const area = parseFloat(reqBody.builtUpArea);
   var noOfFloorsAboveGround = parseFloat(reqBody.aboveGroundFloor);
   var noOfFloorsBelowGround = parseFloat(reqBody.belowGroundFloor);
   const roofingMaterial = reqBody.roofingMaterial;
-  const HVAC = reqBody.HVACSystem;
-  const fireProtection = reqBody.fireProtectionSystem;
-  const building = reqBody.buildingType;
-  const constructionType = reqBody.constructionType;
-  const sanitaQuality = reqBody.sanitaryFixtures;
-  const electricalQuality = reqBody.electricalMaterial;
 
-  var costPerSquareMeter = totalmaterialCost; // Assign totalmaterialCost to costPerSquareMeter
-  console.log(costPerSquareMeter);
+  var costPerSquareMeter = materialCostResult.totalCostPermeter;
+  var cement = materialCostResult.cement;
+  console.log(`construction cost per meter square is: ${costPerSquareMeter}`);
+  console.log(`cement per meter square: ${cement}`);
 
   
   // logic for roof type

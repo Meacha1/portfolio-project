@@ -1,6 +1,5 @@
 const { models: { Project } } = require('../models');
 const { estimation, calculateArea, calculateTotalMaterialCost } = require('../algorism/test.js');
-const fetch = require('node-fetch');
 
 module.exports = {
   estimate: async (req, res) => {
@@ -51,8 +50,16 @@ module.exports = {
 
       const totalmaterialCost = await calculateTotalMaterialCost(reqBody); // Calculate totalmaterialCost
 
-      const costEstimate = estimation(totalmaterialCost, reqBody); // Pass totalmaterialCost to estimation function
+      const costEstimate = estimation(totalmaterialCost, reqBody);
 
+      const cement = parseInt(totalmaterialCost.cement * area).toLocaleString();
+      const sand = parseInt(totalmaterialCost.sand * area).toLocaleString();
+      const aggregate = parseInt(totalmaterialCost.aggregate * area).toLocaleString();
+      const steel = parseInt(totalmaterialCost.steel * area).toLocaleString();
+      const HCB = parseInt(totalmaterialCost.HCB * area).toLocaleString();
+      const paint = parseInt(totalmaterialCost.paint * area).toLocaleString();
+      const tile = parseInt(totalmaterialCost.tile * area).toLocaleString();
+      
       const createdAt = Date.now();
       const updatedAt = Date.now();
 
@@ -75,7 +82,7 @@ module.exports = {
         userId
       });
 
-      const formattedCostEstimate = costEstimate.toLocaleString();
+      const formattedCostEstimate = parseInt(costEstimate).toLocaleString();
 
       const selectionMap = {
         low: "Low-quality internal door with local material, no built-in cupboard, and cabinets",
@@ -112,7 +119,14 @@ module.exports = {
         sanitaryFixtures,
         electricalMaterial,
         floorFinishingType: selectionMap[floorFinishingType],
-        fireProtectionSystem
+        fireProtectionSystem,
+        cement,
+        sand,
+        aggregate,
+        steel,
+        HCB,
+        tile,
+        paint
       });
     } else {
       res.send("Not added to the database!");
@@ -151,7 +165,16 @@ module.exports = {
     const reqBody = req.body;
     const totalmaterialCost = await calculateTotalMaterialCost(reqBody);
     const costEstimate = estimation(totalmaterialCost, reqBody);
+
+    const cement = parseInt(totalmaterialCost.cement * area).toLocaleString();
+    const sand = parseInt(totalmaterialCost.sand * area).toLocaleString();
+    const aggregate = parseInt(totalmaterialCost.aggregate * area).toLocaleString();
+    const steel = parseInt(totalmaterialCost.steel * area).toLocaleString();
+    const HCB = parseInt(totalmaterialCost.HCB * area).toLocaleString();
+    const paint = parseInt(totalmaterialCost.paint * area).toLocaleString();
+    const tile = parseInt(totalmaterialCost.tile * area).toLocaleString();
   
+    
     const updatedProject = await project.update(
       {
         builtUpArea,
@@ -171,7 +194,7 @@ module.exports = {
       { where: { projectName, userId } }
     );
   
-    const formattedCostEstimate = costEstimate.toLocaleString();
+    const formattedCostEstimate = parseInt(costEstimate).toLocaleString();
 
     const selectionMap = {
       low: "Low-quality internal door with local material, no built-in cupboard, and cabinets",
@@ -208,7 +231,14 @@ module.exports = {
       sanitaryFixtures,
       electricalMaterial,
       floorFinishingType: selectionMap[floorFinishingType],
-      fireProtectionSystem
+      fireProtectionSystem,
+      cement,
+      sand,
+      aggregate,
+      steel,
+      HCB,
+      tile,
+      paint
     });
-  },  
+  }, 
 };
