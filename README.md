@@ -14,8 +14,6 @@ This project is a collaboration between three individuals, combining their civil
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Related Projects](#related-projects)
-- [Licensing](#licensing)
 - [Contact](#contact)
 - [Project Screenshots](#project-screenshots)
 
@@ -50,14 +48,6 @@ We welcome contributions from the community to enhance the Addis Building Cost E
 
 Please adhere to the project's coding style, maintain clear commit messages, and ensure proper testing of your changes.
 
-## Related Projects
-
-- [Related Project 1](placeholder_link_1): Description of the related project.
-- [Related Project 2](placeholder_link_2): Description of the related project.
-
-## Licensing
-
-The Addis Building Cost Estimator is licensed under the [MIT License](placeholder_license_link).
 
 ## Contact
 
