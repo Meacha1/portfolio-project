@@ -167,12 +167,23 @@ footer a {
 }
 
 
-body > div.container > div.projects > ul > li > * {
+body > div.container > div.projects > ul > li > div > a {
     color: #132957;
     text-decoration: none;
   }
-
-body > div.container > div.projects > ul > li > *:hover {
+  
+  body > div.container > div.projects > ul > li:hover {
     color: #16b9b9;
     text-decoration: underline;
+  }
+  
+  .projects ul li:hover {
+    background-color: #b0dddd;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 2px;
+  }
+  
+  .projects ul li:hover i.delete-icon {
+    visibility: visible;
   }

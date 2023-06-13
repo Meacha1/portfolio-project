@@ -1,8 +1,12 @@
-# Building Cost Estimator
+# Addis Building Cost Estimator
+
+![Building Cost Estimator Screenshot](public/images/logo.png)
 
 Building Cost Estimator is a web-based application built with Node.js that allows users to estimate the cost of their construction projects. Users can sign up, provide project information, and receive a cost estimation based on their input data. The application provides a convenient way for users to track and manage their project costs.
 
-This project is a collaboration between three individuals, combining their civil engineering expertise with software engineering skills to create a comprehensive building cost estimation tool.
+- Deployed Site: [Addis Building Cost Estimator](https://your-deployed-site-url.com)
+- Final Project Blog Article: [Building Cost Estimator Blog](https://your-blog-article-url.com)
+- Authors' LinkedIn Profiles: [Meacha Tafa](https://www.linkedin.com/in/meacha-tafa), [Elphaz Bekele](https://www.linkedin.com/in/elphaz-bekele), [Eyob Wolde](https://www.linkedin.com/in/eyob-wolde)
 
 ## Table of Contents
 
@@ -11,7 +15,7 @@ This project is a collaboration between three individuals, combining their civil
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Contact](#contact)
+- [Related Projects](#related-projects)
 
 ## Project Description
 
@@ -54,12 +58,3 @@ We welcome contributions from the community to enhance the Building Cost Estimat
 5. Create a pull request to the main repository, explaining your changes and their purpose.
 
 Please adhere to the project's coding style, maintain clear commit messages, and ensure proper testing of your changes.
-
-
-## Contact
-
-For any questions, feedback, or inquiries, please feel free to reach out to us:
-
-- Meacha Tafa: meachattd@gmail.com
-- Elphaz Bekele: elphazshiferaw@gmail.com
-- Eyob Wolde: Jobzadedany@gmail.com

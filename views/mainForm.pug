@@ -1,116 +1,107 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Building Cost Estimation</title>
-	<link rel="stylesheet" href="../css/mainForm.css">
-</head>
-<body>
-	<header>
-		<nav>
-			
-			<ul>
-				<a href="/"><img src="../images/logo.png" alt="logo"></a>
-				<li><a href="/">Home</a></li>
-				<li><a href="/#abouteUs">About Us</a></li>
-				<li><a href="/#contact">Contact</a></li>
-			</ul>
-			<ul>
-				<li>Hello, #{username}</a></li>
-				<li><a href="/logout" class="myButton">Logout</a></li>
-			</ul>
-		</nav>
-	</header>
-	<div class="container">
-	<div class="projects">
-		<h2>My projects</h2>
-		ul
-			each projectname in projectnames
-				li
-					a(href='/displayProject?projectName=' + encodeURIComponent(projectname)) #{projectname}
-	</div>
-	<div class="main">
-		<h1>Building Cost Estimation</h1>
-		<form action="/mainForm" method="POST" onsubmit="return validateForm()">
-			<label for="project-name">Project Name:</label>
-			<input type="text" id="project-name" name="projectName" required><br><br>
+doctype html
+html
+  head
+    title Building Cost Estimation
+    link(rel='stylesheet', href='../css/mainForm.css')
+  body
+    header
+      nav
+        ul
+          li
+            a(href='/')
+              img(src='../images/logo.png', alt='logo')
+          li
+            a(href='/') Home
+          li
+            a(href='/#abouteUs') About Us
+          li
+            a(href='/#contact') Contact
+        ul
+          li Hello, #{username}
+          li
+            a(href='/logout', class='myButton') Logout
+    div.container
+      div.projects
+        h2 My projects
+        ul
+          each projectname in projectnames
+            li
+              div.project-item
+                a(href='/displayProject?projectName=' + encodeURIComponent(projectname)) #{projectname}
+                i.delete-icon(onclick=`deleteProject('${projectname}')`, style="visibility: hidden") &#x2716; Delete
+      div.main
+        h1 Fill in your project information here
+        form(action='/mainForm', method='POST', onsubmit="return validateForm()")
+          label(for='project-name') Project Name:
+          input(type='text', id='project-name', name='projectName', required)
+          br
+          br
 
-			<label for="built-up-area">Built-up Area in m2:</label>
-			<input type="number" id="built-up-area" name="builtUpArea" min="1" required>
+          label(for='built-up-area') Built-up Area in m2:
+          input(type='number', id='built-up-area', name='builtUpArea', min='1', required)
 
-			<label for="above_ground_floors">Number of Floors Above Ground Level:</label>
-			<input type="number" id="above_ground_floors" name="aboveGroundFloor" min="0" required>
+          label(for='above_ground_floors') Number of Floors Above Ground Level:
+          input(type='number', id='above_ground_floors', name='aboveGroundFloor', min='0', required)
 
-			<label for="below_ground_floors">Number of Floors Below Ground Level:</label>
-			<input type="number" id="below_ground_floors" name="belowGroundFloor" min="0" required>
+          label(for='below_ground_floors') Number of Floors Below Ground Level:
+          input(type='number', id='below_ground_floors', name='belowGroundFloor', min='0', required)
 
-			<label for="floor_finishing_type">Floor Finishing Quality:</label>
-			<select id="floor_finishing_type" name="floorFinishingType" required>
-				<option value="porcelineLocal">Porceline Local</option>
-				<option value="porcelineImported">Porceline Imported</option>
-				<option value="ceramicLocal">Ceramic Local</option>
-				<option value="ceramicImported">Ceramic Imported</option>
-				<option value="graniteLocal">Granite Local</option>
-				<option value="graniteImported">Granite Imported</option>
-				<option value="marbleLocal">Marble Local</option>
-			</select>
+          label(for='floor_finishing_type') Floor Finishing Quality:
+          select(id='floor_finishing_type', name='floorFinishingType', required)
+            option(value='porcelineLocal') Porceline Local
+            option(value='porcelineImported') Porceline Imported
+            option(value='ceramicLocal') Ceramic Local
+            option(value='ceramicImported') Ceramic Imported
+            option(value='graniteLocal') Granite Local
+            option(value='graniteImported') Granite Imported
+            option(value='marbleLocal') Marble Local
 
-			<label for="carpentry_and_joinery">Carpentry And Joinery Material Quality Grade:</label>
-			<select id="carpentry_and_joinery" name="carpentryAndJoinery" required>
-				<option value="low">Low-quality internal door with local material no built-in cupboard, and cabinets</option>
-				<option value="low1">Low-quality internal door, built-in cupboard, and cabinets with local material</option>
-				<option value="medium" selected>Medium-quality internal door with local material no built-in cupboard, and cabinets</option>
-				<option value="medium1">Medium-quality internal door, built-in cupboard, and cabinets with local material</option>
-				<option value="high">High-quality internal door with local material no built-in cupboard, and cabinets</option>
-				<option value="high1">High-quality internal door, built-in cupboard, and cabinets with local material</option>
-				<option value="best">Best-quality -quality internal door with imported material no built-in cupboard, and cabinets</option>
-				<option value="best1">Best-quality -quality internal door, built-in cupboard, and cabinets with imported material</option>
-			</select>
+          label(for='carpentry_and_joinery') Carpentry And Joinery Material Quality Grade:
+          select(id='carpentry_and_joinery', name='carpentryAndJoinery', required)
+            option(value='low') Low-quality internal door with local material no built-in cupboard, and cabinets
+            option(value='low1') Low-quality internal door, built-in cupboard, and cabinets with local material
+            option(value='medium', selected) Medium-quality internal door with local material no built-in cupboard, and cabinets
+            option(value='medium1') Medium-quality internal door, built-in cupboard, and cabinets with local material
+            option(value='high') High-quality internal door with local material no built-in cupboard, and cabinets
+            option(value='high1') High-quality internal door, built-in cupboard, and cabinets with local material
+            option(value='best') Best-quality -quality internal door with imported material no built-in cupboard, and cabinets
+            option(value='best1') Best-quality -quality internal door, built-in cupboard, and cabinets with imported material
 
-			<label for="roofing-material">Roofing Material:</label>
-			<select id="roofing-material" name="roofingMaterial" required>
-				<option value="CIS Roof">CIS Roof</option>
-				<option value="Concerete Slab Roof">Concerete Slab Roof</option>
-			</select>
+          label(for='roofing-material') Roofing Material:
+          select(id='roofing-material', name='roofingMaterial', required)
+            option(value='CIS Roof') CIS Roof
+            option(value='Concrete Slab Roof') Concrete Slab Roof
 
-			<label for="hvac-system">Is There HVAC System:</label>
-			<select id="HVAC System" name="HVACSystem" required>
-				<option value="Yes">Yes</option>
-				<option value="No">No</option>
-			</select>
+          label(for='hvac-system') Is There HVAC System:
+          select(id='hvac-system', name='HVACSystem', required)
+            option(value='Yes') Yes
+            option(value='No') No
 
-			<label for="fire-protection-syste">Is There Fire Protection System:</label>
-			<select id="fire-protection-syste" name="fireProtectionSystem" required>
-				<option value="Yes">Yes</option>
-				<option value="No">No</option>
-			</select>
+          label(for='fire-protection-system') Is There Fire Protection System:
+          select(id='fire-protection-system', name='fireProtectionSystem', required)
+            option(value='Yes') Yes
+            option(value='No') No
 
-			<label for="building_type">Building Type:</label>
-			<select id="building_type" name="buildingType" required>
-				<option value="residential">Residential</option>
-				<option value="commercial">Commercial</option>
-				<option value="industrial">Industrial</option>
-			</select>
+          label(for='building_type') Building Type:
+          select(id='building_type', name='buildingType', required)
+            option(value='residential') Residential
+            option(value='commercial') Commercial
+            option(value='industrial') Industrial
 
-			<label for="sanitary_fixtures">Sanitary Fixtures Quality Grade:</label>
-			<select id="sanitary_fixtures" name="sanitaryFixtures" required>
-				<option value="low">Low</option>
-				<option value="medium" selected>Medium</option>
-				<option value="high">High</option>
-				<option value="best">Best</option>
-			</select>
-			<label for="electrical_material">Electrical Material Quality Grade:</label>
-			<select id="electrical_material" name="electricalMaterial" required>
-				<option value="low">Low</option>
-				<option value="medium" selected>Medium</option>
-				<option value="high">High</option>
-				<option value="best">Best</option>
-			</select>
-			<button type="submit" value="mainForm">Submit</button>
-		</form>
-	</div>
-	</div>
-</body>
-<footer>
-	<p>&copy; 2023 Building Cost Estimation</p>
-</footer>
-</html>
+          label(for='sanitary_fixtures') Sanitary Fixtures Quality Grade:
+          select(id='sanitary_fixtures', name='sanitaryFixtures', required)
+            option(value='low') Low
+            option(value='medium', selected) Medium
+            option(value='high') High
+            option(value='best') Best
+
+          label(for='electrical_material') Electrical Material Quality Grade:
+          select(id='electrical_material', name='electricalMaterial', required)
+            option(value='low') Low
+            option(value='medium', selected) Medium
+            option(value='high') High
+            option(value='best') Best
+
+          button(type='submit', value='mainForm') Submit
+    footer
+      p &copy; 2023 Building Cost Estimation
