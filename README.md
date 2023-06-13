@@ -2,11 +2,11 @@
 
 ![Building Cost Estimator Screenshot](public/images/logo.png)
 
-Building Cost Estimator is a web-based application built with Node.js that allows users to estimate the cost of their construction projects. Users can sign up, provide project information, and receive a cost estimation based on their input data. The application provides a convenient way for users to track and manage their project costs.
+Addis Building Cost Estimator is a web-based application built with Node.js that allows users to estimate the cost of their construction projects. Users can sign up, provide project information, and receive a cost estimation based on their input data. The application provides a convenient way for users to track and manage their project costs.
 
-- Deployed Site: [Addis Building Cost Estimator](https://your-deployed-site-url.com)
+- Deployed Site: [Addis Building Cost Estimator](http://18.235.233.160/)
 - Final Project Blog Article: [Building Cost Estimator Blog](https://your-blog-article-url.com)
-- Authors' LinkedIn Profiles: [Meacha Tafa](https://www.linkedin.com/in/meacha-tafa), [Elphaz Bekele](https://www.linkedin.com/in/elphaz-bekele), [Eyob Wolde](https://www.linkedin.com/in/eyob-wolde)
+- Authors' LinkedIn Profiles: [Meacha Tafa](https://www.linkedin.com/in/meacha-teshome/), [Elphaz Bekele](https://www.linkedin.com/in/elphazshiferaw/), [Eyob Wolde](https://www.linkedin.com/in/eyob-zewdu-283581b0/)
 
 ## Table of Contents
 
