@@ -8,7 +8,7 @@ This project is a collaboration between three individuals, combining their civil
 
 **Project Inspiration:** The Addis Building Cost Estimator was born out of a desire to simplify the process of estimating construction project costs. Our team recognized the challenges faced by individuals and organizations in accurately estimating the cost of construction projects. We wanted to create a tool that would empower users to plan and budget their projects effectively, leveraging our combined knowledge of civil engineering and software engineering.
 
-Final Project Blog Article: [Read the Blog Article](http://)
+Final Project Blog Article: [Read the Blog Article](https://medium.com/@meachattd/addis-building-cost-estimation-3e4f900bcc9e)
 
 ## Table of Contents
 
