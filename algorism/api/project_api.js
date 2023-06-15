@@ -86,73 +86,24 @@ app2.get('/api/project/:projectName', (req, res) => {
   });
 });
 
-app2.put('/api/project/:projectName', (req, res) => {
-  const {
-    builtUpArea,
-    aboveGroundFloor,
-    belowGroundFloor,
-    floorFinishingType,
-    carpentryAndJoinery,
-    roofingMaterial,
-    HVACSystem,
-    fireProtectionSystem,
-    buildingType,
-    sanitaryFixtures,
-    electricalMaterial,
-    costEstimate,
-    updatedAt
-  } = req.body;
-
+app2.delete('/api/project/:id', (req, res) => {
   // Get a connection from the pool
   pool.getConnection((err, connection) => {
     if (err) {
       console.error('Error connecting to MySQL database:', err);
       return res.status(500).send('Error connecting to MySQL database');
     }
-
-    const projectName = req.params.projectName;
-
-    // Define the SQL query
-    const query = `
-      UPDATE project
-      SET builtUpArea = ?, aboveGroundFloor = ?, belowGroundFloor = ?, floorFinishingType = ?,
-          carpentryAndJoinery = ?, roofingMaterial = ?, HVACSystem = ?, fireProtectionSystem = ?,
-          buildingType = ?, sanitaryFixtures = ?, electricalMaterial = ?, costEstimate = ?, updatedAt = ?
-      WHERE projectName = ?
-    `;
-
-    // Execute the query
-    connection.query(
-      query,
-      [
-        builtUpArea,
-        aboveGroundFloor,
-        belowGroundFloor,
-        floorFinishingType,
-        carpentryAndJoinery,
-        roofingMaterial,
-        HVACSystem,
-        fireProtectionSystem,
-        buildingType,
-        sanitaryFixtures,
-        electricalMaterial,
-        costEstimate,
-        updatedAt,
-        projectName
-      ],
-      (error, results) => {
-        // Release the connection back to the pool
-        connection.release();
-        if (error) {
-          console.error('Error executing MySQL query:', error);
-          return res.status(500).send('Error executing MySQL query');
-        }
-        // Send the results back as JSON
-        res.json(results);
+    connection.query('DELETE FROM project WHERE id = ?', [req.params.id], (error, results) => {
+      // Release the connection back to the pool
+      connection.release();
+      if (error) {
+        console.error('Error executing MySQL query:', error);
+        return res.status(500).send('Error executing MySQL query');
       }
-    );
+      // Send the success message back as JSON
+      res.json({ message: 'Project deleted successfully' });
+    });
   });
 });
-
 
 module.exports = app2;
