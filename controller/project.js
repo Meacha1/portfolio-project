@@ -240,5 +240,27 @@ module.exports = {
       tile,
       paint
     });
-  }, 
+  },
+  deleteProject: async (req, res, userId, projectName) => {
+    if (!userId) {
+      res.send("User ID not available");
+      return;
+    }
+  
+    if (!projectName) {
+      res.send("Project name not provided");
+      return;
+    }
+  
+    const project = await Project.findOne({ where: { userId, projectName } });
+    if (!project) {
+      res.send("Project not found");
+      return;
+    }
+  
+    // Perform the deletion logic here
+    await project.destroy();
+  
+    res.redirect('/'); // Redirect to the desired page after successful deletion
+  },
 };

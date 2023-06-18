@@ -177,6 +177,7 @@ body > div.container > div.projects > ul > li > div > a {
     text-decoration: underline;
   }
   
+  
   .projects ul li:hover {
     background-color: #b0dddd;
     border-radius: 4px;
@@ -184,6 +185,27 @@ body > div.container > div.projects > ul > li > div > a {
     margin: 2px;
   }
   
-  .projects ul li:hover i.delete-icon {
-    visibility: visible;
+.projects ul li .delete-icon {
+color: #020202;
+}
+
+
+.projects ul li:hover .delete-icon {
+display: inline-block;
+}
+
+.confirmation-options {
+    visibility: hidden;
   }
+  
+  .confirmation-options a {
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+
+body > div.container > div.projects > ul > li> div {
+display: flex;
+justify-content: space-between;
+margin-right: 5px;
+}

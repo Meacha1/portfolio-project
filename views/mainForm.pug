@@ -1,8 +1,28 @@
 doctype html
 html
   head
-    title Building Cost Estimation
+    title Addis Building Cost Estimation
     link(rel='stylesheet', href='../css/mainForm.css')
+    script.
+      function toggleDeleteIcon(index, show) {
+        const deleteIcon = document.querySelector(`.delete-icon-${index}`);
+        deleteIcon.style.display = show ? "inline-block" : "none";
+      }
+      
+      function showConfirmation(index, projectname) {
+        const confirmationOptions = document.getElementById(`confirmation-options-${index}`);
+        confirmationOptions.style.visibility = "visible";
+      }
+      
+      function hideConfirmation(index) {
+        const confirmationOptions = document.getElementById(`confirmation-options-${index}`);
+        confirmationOptions.style.visibility = "hidden";
+      }
+      
+      function deleteProject(index, projectname) {
+        // Perform the deletion logic here
+        console.log(`Deleting project: ${projectname}`);
+      }
   body
     header
       nav
@@ -24,11 +44,15 @@ html
       div.projects
         h2 My projects
         ul
-          each projectname in projectnames
-            li
+          each projectname, index in projectnames
+            li(onmouseover=`toggleDeleteIcon(${index}, true)`, onmouseout=`toggleDeleteIcon(${index}, false)`)
               div.project-item
                 a(href='/displayProject?projectName=' + encodeURIComponent(projectname)) #{projectname}
-                i.delete-icon(onclick=`deleteProject('${projectname}')`, style="visibility: hidden") &#x2716; Delete
+                span.confirmation-options(id=`confirmation-options-${index}`) 
+                  a.confirm-yes(href=' /deleteProject', onclick=`deleteProject(${index}, '${projectname}')`) Yes
+                  a.confirm-no(href='#', onclick=`hideConfirmation(${index})`) No
+                i.delete-icon(class=`delete-icon-${index}`, onclick=`showConfirmation(${index}, '${projectname}')`, style="display: none") &#128465;
+
       div.main
         h1 Fill in your project information here
         form(action='/mainForm', method='POST', onsubmit="return validateForm()")
@@ -104,4 +128,4 @@ html
 
           button(type='submit', value='mainForm') Submit
     footer
-      p &copy; 2023 Building Cost Estimation
+      p &copy; 2023 Addis Building Cost Estimation

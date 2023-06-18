@@ -23,6 +23,7 @@ const createUser = require('./routes/createUser');
 const mainForm = require('./routes/mainForm');
 const displayProject = require('./routes/displayProject');
 const forgetPassword = require('./routes/forgetPassword');
+const deleteProject = require('./routes/deleteProject');
 
 // Middleware setup
 const sessionStore = new MySQLStore({
@@ -74,6 +75,7 @@ app.use('/createUser', createUser);
 app.use('/mainForm', mainForm);
 app.use('/displayProject', displayProject);
 app.use('/forgetPassword', forgetPassword);
+app.use('/deleteProject', deleteProject);
 
 // Render home page
 app.get('/', (req, res) => {
