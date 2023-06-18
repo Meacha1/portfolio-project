@@ -99,8 +99,8 @@ const port = process.env.PORT || 3000;
 })();
 
 // APIs
-const app1 = require('./algorism/api/material_api');
-const app2 = require('./algorism/api/project_api');
+const app1 = require('./algorithm/api/material_api');
+const app2 = require('./algorithm/api/project_api');
 
 const port1 = process.env.PORT || 4003;
 const port2 = process.env.PORT || 4004;

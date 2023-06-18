@@ -1,5 +1,5 @@
 const { models: { Project } } = require('../models');
-const { estimation, calculateArea, calculateTotalMaterialCost } = require('../algorism/test.js');
+const { estimation, calculateArea, calculateTotalMaterialCost } = require('../algorithm/test.js');
 
 module.exports = {
   estimate: async (req, res) => {
