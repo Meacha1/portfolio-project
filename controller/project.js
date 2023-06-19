@@ -260,7 +260,5 @@ module.exports = {
   
     // Perform the deletion logic here
     await project.destroy();
-  
-    res.redirect('/'); // Redirect to the desired page after successful deletion
   },
 };

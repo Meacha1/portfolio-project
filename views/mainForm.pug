@@ -23,6 +23,25 @@ html
         // Perform the deletion logic here
         console.log(`Deleting project: ${projectname}`);
       }
+      document.addEventListener('DOMContentLoaded', () => {
+        const confirmYesButtons = document.querySelectorAll('.confirm-yes');
+        confirmYesButtons.forEach((button) => {
+          button.addEventListener('click', async () => {
+            const projectName = encodeURIComponent(button.dataset.projectname);
+  
+            // Send an AJAX request to the deleteProject route
+            const response = await fetch(`/deleteProject?projectName=${projectName}`, { method: 'GET' });
+            
+            if (response.ok) {
+              // Reload the page
+              window.location.reload();
+            } else {
+              // Handle error
+              console.log('Error:', response.statusText);
+            }
+          });
+        });
+      });
   body
     header
       nav
@@ -49,7 +68,7 @@ html
               div.project-item
                 a(href='/displayProject?projectName=' + encodeURIComponent(projectname)) #{projectname}
                 span.confirmation-options(id=`confirmation-options-${index}`) 
-                  a.confirm-yes(href=' /deleteProject', onclick=`deleteProject(${index}, '${projectname}')`) Yes
+                  a.confirm-yes(href='/deleteProject?projectName=' + encodeURIComponent(projectname)) Yes
                   a.confirm-no(href='#', onclick=`hideConfirmation(${index})`) No
                 i.delete-icon(class=`delete-icon-${index}`, onclick=`showConfirmation(${index}, '${projectname}')`, style="display: none") &#128465;
 
