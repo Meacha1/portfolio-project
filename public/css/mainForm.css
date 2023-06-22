@@ -185,8 +185,9 @@ body > div.container > div.projects > ul > li > div > a {
     margin: 2px;
   }
   
-.projects ul li .delete-icon {
+.projects ul li .delete-icon-image {
 color: #020202;
+width: 15px; height: auto;
 }
 
 

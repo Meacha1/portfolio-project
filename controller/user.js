@@ -1,43 +1,49 @@
 const { models: { User } } = require('../models');
 const nodemailer = require('nodemailer');
 const dbConfig = require('../config/db-config.js');
+const bcrypt = require("bcrypt");
 
 const host = dbConfig.HOST;
 
 module.exports = {
-    login: async (req, res) => {
-        if (req.body.email && req.body.password) {
-            const { email, password } = req.body;
-            const user = await User.findOne({ where: { email, password } });
-            if (user) {
-                req.session.userId = user.id; // Store userId in the session
-                const username = user.username;
-                console.log(`my user id is: ${user.id}`);
-
-                
-                // Fetch projects from the database
-                try {
-                    const response = await fetch(`http://${host}:4004/api/projects/${user.id}`);
-                    if (response.ok) {
-                      const projects = await response.json();
-                      const projectnames = projects.map((project) => project.projectName);
-                      console.log(`my projects are: ${projectnames}`);
-                      res.render('mainForm', { username, projectnames });
-                    } else {
-                      console.error('Error retrieving user projects:', response.status);
-                      res.send('Error retrieving user projects');
-                    }
-                  } catch (error) {
-                    console.error('Error retrieving user projects:', error);
-                    res.send('Error retrieving user projects');
-                  }
+  login: async (req, res) => {
+    if (req.body.email && req.body.password) {
+      const { email, password } = req.body;
+      const user = await User.findOne({ where: { email } });
+      const oldUser = await User.findOne({ where: { email, password } });
+      if (user) {
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (isPasswordValid || oldUser) {
+          req.session.userId = user.id; // Store userId in the session
+          const username = user.username;
+          console.log(`my user id is: ${user.id}`);
+  
+          // Fetch projects from the database
+          try {
+            const response = await fetch(`http://${host}:4004/api/projects/${user.id}`);
+            if (response.ok) {
+              const projects = await response.json();
+              const projectnames = projects.map((project) => project.projectName);
+              console.log(`my projects are: ${projectnames}`);
+              res.render('mainForm', { username, projectnames });
             } else {
-                res.render('sorry0');   // if the user is not found in the database
+              console.error('Error retrieving user projects:', response.status);
+              res.send('Error retrieving user projects');
             }
+          } catch (error) {
+            console.error('Error retrieving user projects:', error);
+            res.send('Error retrieving user projects');
+          }
         } else {
-            res.send("Not added to the database!")
+          res.render('sorry0'); // Password is incorrect
         }
-    },
+      } else {
+        res.render('sorry0'); // User is not found in the database
+      }
+    } else {
+      res.send("Not added to the database!");
+    }
+  },
     createAccount: async (req, res) => {
         if (req.body.email && req.body.username &&
              req.body.password &&

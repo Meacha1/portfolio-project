@@ -70,7 +70,9 @@ html
                 span.confirmation-options(id=`confirmation-options-${index}`) 
                   a.confirm-yes(href='/deleteProject?projectName=' + encodeURIComponent(projectname)) Yes
                   a.confirm-no(href='#', onclick=`hideConfirmation(${index})`) No
-                i.delete-icon(class=`delete-icon-${index}`, onclick=`showConfirmation(${index}, '${projectname}')`, style="display: none") &#128465;
+                i.delete-icon(class=`delete-icon-${index}`, onclick=`showConfirmation(${index}, '${projectname}')`, style="display: none")
+                  img.delete-icon-image(src='../images/trash-bin.png', alt='Delete')
+
 
       div.main
         h1 Fill in your project information here
