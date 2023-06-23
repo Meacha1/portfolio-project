@@ -1,49 +1,86 @@
-const puppeteer = require('puppeteer');
 const cron = require('node-cron');
-const mysql = require('mysql');
+const ExcelJS = require('exceljs');
+const { Sequelize } = require('sequelize');
+const dbConfig = require('../config/db-config.js');
+const MaterialPriceModel = require('../models/materialPrice.js');
 
-// MySQL connection configuration
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'price_list'
+// Create a new Sequelize instance
+const sequelize = new Sequelize(dbConfig.DATABASE, dbConfig.USER, dbConfig.PASSWORD, {
+  host: dbConfig.HOST,
+  dialect: dbConfig.DIALECT
 });
 
-// Function to insert data into MySQL
-function insertDataToMySQL(item, price) {
-  const query = `UPDATE material SET price = ${price} WHERE item = '${item}'`;
-  connection.query(query, (error, results, fields) => {
-    if (error) throw error;
-    console.log('Data inserted successfully');
-  });
+// Define the MaterialPrice model
+const MaterialPrice = MaterialPriceModel(sequelize, Sequelize);
+
+// Function to insert or update data using Sequelize
+async function insertOrUpdateData(item, price) {
+  try {
+    const [result] = await MaterialPrice.findOrCreate({
+      where: { item },
+      defaults: { price }
+    });
+
+    if (result) {
+      console.log('Data inserted or updated successfully');
+    } else {
+      console.log('Data not inserted or updated');
+    }
+  } catch (error) {
+    console.error('Error inserting or updating data:', error);
+  }
 }
 
-async function scrapeMercato() {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  // set the navigation timeout to 0 (i.e., infinite)
-  page.setDefaultNavigationTimeout(0);
-  await page.goto('https://con.2merkato.com/prices/cat/2');
+// Function to read data from Excel file
+async function readDataFromExcel() {
+  try {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile('./webScraping/material.xlsx');
 
-  const [el] = await page.$x('//*[@id="content"]/main/div/div/div[2]/table/tbody/tr[2]/td[2]/text()');
-  const txt = await el.getProperty('textContent');
-  const srcTxt = await txt.jsonValue();
+    const worksheet = workbook.getWorksheet('Sheet1');
+    worksheet.eachRow((row, rowNumber) => {
+      if (rowNumber > 1) {
+        const itemCell = row.getCell(1);
+        const priceCell = row.getCell(2);
 
-  // Remove new lines and unnecessary spaces
-  const cleanText = srcTxt.replace(/\n/g, '').trim();
+        // Retrieve the values as strings
+        const item = itemCell.text.toString();
+        const price = priceCell.text;
 
-  // Convert cleaned text to a float without losing decimal precision
-  const price = parseFloat(cleanText.replace(',', ''));
+        console.log(`Row ${rowNumber}: item=${item}, price=${price}`);
 
-  // Insert the data into MySQL
-  insertDataToMySQL('cement', price);
+        // Parse the price as an integer
+        const priceValue = parseInt(price);
 
-  await browser.close();
+        // Check if the values are valid
+        if (item && !isNaN(priceValue)) {
+          // Insert or update the data using Sequelize
+          insertOrUpdateData(item, priceValue);
+        } else {
+          console.warn(`Skipping invalid row in Excel: Row ${rowNumber}`);
+        }
+      }
+    });
+
+    console.log('Data reading from Excel completed.');
+  } catch (error) {
+    console.error('Error reading Excel file:', error);
+  }
 }
 
-// Schedule the scraping function to run once a day at a specific time (e.g., 8:00 AM)
-cron.schedule('*/60 * * * * *', () => {
-    console.log('Running the scraping function...');
-    scrapeMercato();
+// Schedule the Excel reading function to run once a day at a specific time (e.g., 8:00 AM)
+cron.schedule('0 8 * * *', () => {
+  console.log('Running the Excel reading function...');
+  readDataFromExcel();
+});
+
+// Synchronize the Sequelize model with the database
+sequelize.sync()
+  .then(() => {
+    console.log('Sequelize synchronized with the database.');
+  })
+  .catch((error) => {
+    console.error('Error synchronizing Sequelize with the database:', error);
   });
+
+module.exports = readDataFromExcel;

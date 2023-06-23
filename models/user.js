@@ -24,18 +24,11 @@ module.exports = (sequelize) => {
     },
     {
       freezeTableName: true,
-      hooks: {
-        beforeCreate: async (user) => {
-          const saltRounds = 10;
-          const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-          user.password = hashedPassword;
-        },
-      },
     }
   );
 
   // Instance method to compare passwords during authentication
-  User.prototype.comparePassword = async function (password) {
+  User.prototype.isValidPassword = async function (password) {
     return bcrypt.compare(password, this.password);
   };
 

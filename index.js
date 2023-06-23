@@ -4,7 +4,7 @@ const setupDatabase = require('./cost_estimator_db');
 const cors = require('cors');
 const path = require('path');
 const db = require('./models/index');
-const readDataFromExcel = require('./webScraping/index');
+const scrapeMercato = require('./webScraping/index');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
@@ -52,12 +52,18 @@ app.use(cors({ origin: 'http://localhost:3000' }));
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-}, async (username, password, done) => {
+}, async (email, password, done) => {
   try {
-    const user = await User.findOne({ where: { email: username } });
-    if (!user || !user.isValidPassword(password)) {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
       return done(null, false);
     }
+
+    const isValidPassword = await user.isValidPassword(password);
+    if (!isValidPassword) {
+      return done(null, false);
+    }
+
     return done(null, user);
   } catch (error) {
     return done(error);
@@ -115,5 +121,5 @@ app2.listen(port2, () => {
   console.log(`App 2 running on port ${port2}`);
 });
 
-// Read data from Excel
-readDataFromExcel();
+// web scraping function
+scrapeMercato();
