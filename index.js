@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const setupDatabase = require('./cost_estimator_db');
 const cors = require('cors');
 const path = require('path');
 const db = require('./models/index');
@@ -8,12 +7,10 @@ const scrapeMercato = require('./webScraping/index');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const mysql = require('mysql');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const dbConfig = require("./config/db-config.js");
-const Session = require('./models/session');
 require('dotenv').config();
 
 

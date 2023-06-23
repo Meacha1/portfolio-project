@@ -83,7 +83,7 @@ async function scrapeMercato() {
   console.log('Average Price of sand', sand / sandCount);
   insertDataToMySQL('sand', sand / sandCount);
   console.log('Average Price of agregates', agregates / agregatesCount);
-  insertDataToMySQL('aggregates', agregates / agregatesCount);
+  insertDataToMySQL('aggregate', agregates / agregatesCount);
   console.log('Average Price of steel', steel / steelCount);
   insertDataToMySQL('steel', steel / steelCount);
 
@@ -164,10 +164,10 @@ async function scrapeMercato() {
   console.log('Average Price of marbleLocal', marbleLocal / marbleLocalCount);
   insertDataToMySQL('marbleLocal', marbleLocal / marbleLocalCount);
   console.log('Average Price of ceramic', ceramicLocal / ceramicLocalCount);
-  insertDataToMySQL('ceramic', ceramicLocal / ceramicLocalCount);
+  insertDataToMySQL('ceramicLocal', ceramicLocal / ceramicLocalCount);
   insertDataToMySQL('ceramicImported', (ceramicLocal / ceramicLocalCount) * 1.5);
   console.log('Average Price of porceline', porcelineLocal / porcelineLocalCount);
-  insertDataToMySQL('porceline', porcelineLocal / porcelineLocalCount);
+  insertDataToMySQL('porcelineLocal', porcelineLocal / porcelineLocalCount);
   insertDataToMySQL('porcelineImported', (porcelineLocal / porcelineLocalCount) * 1.5);
 
   // Scrape data from another page
