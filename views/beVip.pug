@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    title Upgrade to VIP
+    link(rel='stylesheet', href='../css/vip.css')
+    style.
+      .payment-options {
+        display: none;
+      }
+
+      .advantages {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-top: 20px;
+      }
+
+      .show {
+        display: block;
+      }
+    script.
+      function togglePaymentOptions() {
+        var paymentOptions = document.getElementById("payment-options");
+        paymentOptions.classList.toggle("show");
+      }
+
+      function showTransactionForm() {
+        var transactionForm = document.getElementById("transaction-form");
+        transactionForm.style.display = "block";
+      }
+  body
+    header
+      nav
+        ul
+          a(href='/') 
+            img(src='../images/logo.png', alt='logo')
+          li
+            a(href='/') Home
+          li
+            a(href='/#aboutUs') About Us
+          li
+            a(href='/#contact') Contact
+        ul
+          li
+            <li><a href="/logout" class="myButton">Logout</a></li>
+    .container
+      h1 Upgrade to VIP Membership you have finished your free trial
+      div
+        .free
+          h2 Free Membership
+          ul
+            li 5 projects and estimates
+            li No project updates
+            li No early access to new features and updates
+            li NO bill of quantity report
+        .vip
+          h2 VIP Membership
+          ul
+            li Unlimited projects and estimates
+            li Unlimited project updates
+            li Early access to new features and updates
+            li Bill of quantity report for major materials
+          h4 5 birr/week or 50 birr/3 months or 150 birr/year
+      button(onclick='togglePaymentOptions()') Upgrade to VIP
+      #payment-options.payment-options
+        h2 Select a Payment Option
+        h4 For mobile payment, use our number 0909068750
+        ul
+          div
+            img(src='../images/telebirr.png', alt='telebirr logo' onclick='showTransactionForm()')
+            li(onclick='showTransactionForm()')
+              form#transaction-form(action='vip', method='POST', style='display: none;')
+                label(for='transaction_number') Transaction Number:
+                div
+                  input(type='text', id='transaction_number', name='transaction_number' placeholder="AG322c6Wk1", required)
+                  button(type='submit', value='vip') Submit
+          img(src='../images/cbebirr.png', alt='cbebirr logo')
+  footer
+    p &copy; 2023 Addis Building Cost Estimation

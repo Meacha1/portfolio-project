@@ -1,5 +1,8 @@
 const { models: { Project } } = require('../models');
+const { models: { User } } = require('../models');
+const { models: { Payment } } = require('../models');
 const { estimation, calculateArea, calculateTotalMaterialCost } = require('../algorithm/test.js');
+const { isExpired } = require('./payment');
 
 module.exports = {
   estimate: async (req, res) => {
@@ -22,6 +25,26 @@ module.exports = {
     if (!userId) {
       res.send("User ID not available");
       return;
+    }
+
+    const user = await User.findOne({ where: { id: userId } });
+    // run isExpired from Payment model to check if the user is still a VIP
+    if (user.isVIP) {
+      isExpired(req, res);
+    }
+
+
+    if (!user) {
+      res.send("User not found");
+      return;
+    } else {
+      const projectCount = user.projectCount + 1;
+      if (projectCount > 5 && !user.isVIP) {
+        res.render("beVip");
+        return;
+      } else {
+        await User.update({ projectCount }, { where: { id: userId } });
+      }
     }
 
     const userProject = await Project.findOne({ where: { projectName, userId } });
@@ -79,7 +102,7 @@ module.exports = {
         costEstimate,
         createdAt,
         updatedAt,
-        userId
+        userId,
       });
 
       const formattedCostEstimate = parseInt(costEstimate).toLocaleString();

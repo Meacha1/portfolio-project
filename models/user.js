@@ -20,6 +20,20 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        set(value) {
+          const hashedPassword = bcrypt.hashSync(value, 10);
+          this.setDataValue("password", hashedPassword);
+        },
+      },
+      projectCount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      isVIP: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
     {

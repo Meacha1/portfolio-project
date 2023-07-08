@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { project } = require('../../controller');
+const { models: { User } } = require('../../models');
 const dbConfig = require('../../config/db-config.js');
 
 const host = dbConfig.HOST;
+
 
 router.get('/', (req, res) => {
   const projectName = req.query['projectName'];
@@ -30,9 +32,14 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-  const userId = req.session.userId; // Retrieve the userId from the session
-  project.updateProject(req, res, userId); // Call the updateProject function and pass the userId
+router.post('/', async (req, res) => {
+  const userId = req.session.userId;
+  const user = await User.findOne({ where: { id: userId } });
+  if (user.isVIP) {
+    project.updateProject(req, res, userId); // Assuming project.updateProject handles the response
+  } else {
+    res.redirect('vip');
+  }
 });
 
 module.exports = router;

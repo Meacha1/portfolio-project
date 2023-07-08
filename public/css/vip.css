@@ -1,0 +1,262 @@
+header {
+	background-color: white;
+	color: #020202;
+	padding: 5px;
+    margin-bottom: 100px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+header img {
+    width: fit-content;
+    height: 100px;
+    margin-right: 80px;
+}
+
+header nav {
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    color: #070505;
+    text-decoration: none;
+    margin-right: 10px;
+    border-bottom: 8px solid #070505;}
+
+header h1 {
+	font-size: 30px;
+    margin-right: 50px;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+	list-style: none;
+    font-size: 20px;
+}
+
+header nav ul li {
+	display: inline-block;
+	margin-right: 40px;
+}
+
+header nav ul li:last-child {
+	margin-right: 40px;
+}
+
+header nav ul li a {
+	color: black;
+	text-decoration: none;
+}
+
+header nav ul li a:hover {
+	text-decoration: underline;
+}
+
+body {
+    padding-bottom: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f1f1;
+}
+
+body h3 {
+    text-align: center;
+}
+/* Main container */
+.container {
+    max-width: 800px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Input fields */
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"] {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+  }
+  
+  /* Submit button */
+  form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #16b9b9;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for submit button */
+  form button[type="submit"]:hover {
+    background-color: #0062cc;
+  }
+
+h1 {
+    text-align: center;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer a {
+    color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+    footer {
+        display: none;
+    }
+}
+
+.myButton {
+    background-color: #16b9b9;
+    border-radius:15px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:10px 32px;
+    text-decoration:none;
+  }
+
+.myButton2 {
+    background-color:#102868;
+    text-align: center;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 20px;
+	text-decoration:none;
+}
+#payment-options > ul > div {
+    align-items: center;
+}
+
+#transaction-form > div {
+    display: flex;
+    flex-direction: row;
+    justify-content:first baseline;
+    height: fit-content;
+}
+
+#transaction-id {
+    width: 35%;
+    margin: 10px 5px 10px 0;
+}
+
+#transaction-form > div > button {
+    width: 40%;
+    margin: 0px 0 10px 5px;
+}
+
+#payment-options > ul > div > img {
+    width: 100px;
+    height: 70px;
+    border-radius: 3px;
+}
+
+#payment-options > ul > img {
+    width: 100px;
+    height: 70px;
+    border-radius: 3px;
+    margin-right: 20px;
+}
+
+body > div.container > button {
+    margin-left: 40%;
+    background-color:#102868;
+    text-align: center;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 20px;
+	text-decoration:none;
+}
+
+#payment-options > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: top;
+    list-style: none;
+}
+
+body > div.container > div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: top;
+    list-style: none;
+}
+
+body > div.container > div:nth-child(2) > div.free {
+    margin-bottom: 10px;
+    width: 45%;
+    border-radius: 5px;
+    border: 1px solid #16b9b9;
+}
+body > div.container > div:nth-child(2) > div.vip {
+    margin-bottom: 10px;
+    width: 45%;
+    border-radius: 5px;
+    border: 1px solid #16b9b9;
+}
+
+body > div.container > div:nth-child(2) > div.free > h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+body > div.container > div:nth-child(2) > div.vip > h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+body > div.container > div:nth-child(2) > div.free > ul > li {
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+body > div.container > div:nth-child(2) > div.vip > ul > li {
+    margin-top: 5px;
+    padding-left: 5px;
+}
+#payment-options > h2, h4 {
+    text-align: center;
+}
+
+body > div.container > div:nth-child(2) > div.vip > h4 {
+    text-align: center;
+    margin-top: 5px;
+}

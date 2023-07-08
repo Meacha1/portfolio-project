@@ -21,6 +21,7 @@ const mainForm = require('./routes/mainForm');
 const displayProject = require('./routes/displayProject');
 const forgetPassword = require('./routes/forgetPassword');
 const deleteProject = require('./routes/deleteProject');
+const vip = require('./routes/vip');
 
 // Middleware setup
 const sessionStore = new MySQLStore({
@@ -79,6 +80,7 @@ app.use('/mainForm', mainForm);
 app.use('/displayProject', displayProject);
 app.use('/forgetPassword', forgetPassword);
 app.use('/deleteProject', deleteProject);
+app.use('/vip', vip);
 
 // Render home page
 app.get('/', (req, res) => {
@@ -106,9 +108,11 @@ const port = process.env.PORT || 3000;
 // APIs
 const app1 = require('./algorithm/api/material_api');
 const app2 = require('./algorithm/api/project_api');
+const app3 = require('./algorithm/api/paymentSMS_api');
 
 const port1 = process.env.PORT || 4003;
 const port2 = process.env.PORT || 4004;
+const port3 = process.env.PORT || 4002;
 
 app1.listen(port1, () => {
   console.log(`App 1 running on port ${port1}`);
@@ -116,6 +120,10 @@ app1.listen(port1, () => {
 
 app2.listen(port2, () => {
   console.log(`App 2 running on port ${port2}`);
+});
+
+app3.listen(port3, () => {
+  console.log(`App 3 running on port ${port3}`);
 });
 
 // web scraping function

@@ -1,4 +1,5 @@
 const { models: { User } } = require('../models');
+const { models: { Payment } } = require('../models');
 const nodemailer = require('nodemailer');
 const dbConfig = require('../config/db-config.js');
 const bcrypt = require("bcrypt");
@@ -17,6 +18,12 @@ module.exports = {
           req.session.userId = user.id; // Store userId in the session
           const username = user.username;
           console.log(`my user id is: ${user.id}`);
+
+          const payment = await Payment.findOne({ where: { userId: user.id } });
+          var remainingDays = 0;
+          if (payment) {
+            remainingDays = Math.floor((payment.expiry_date - Date.now()) / (1000 * 60 * 60 * 24));
+          }
   
           // Fetch projects from the database
           try {
@@ -25,7 +32,7 @@ module.exports = {
               const projects = await response.json();
               const projectnames = projects.map((project) => project.projectName);
               console.log(`my projects are: ${projectnames}`);
-              res.render('mainForm', { username, projectnames });
+              res.render('mainForm', { username, projectnames, remainingDays });
             } else {
               console.error('Error retrieving user projects:', response.status);
               res.send('Error retrieving user projects');

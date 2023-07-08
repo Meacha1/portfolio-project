@@ -13,6 +13,7 @@ db.models.Session = require('./session.js')(sequelize, Sequelize.DataTypes)
 db.models.User = require('./user')(sequelize, Sequelize.DataTypes);
 db.models.Project = require('./project')(sequelize, Sequelize.DataTypes);
 db.models.MaterialPrice = require('./materialPrice')(sequelize, Sequelize.DataTypes);
+db.models.Payment = require('./payment')(sequelize, Sequelize.DataTypes);
 module.exports = db;
 
 module.exports = {
