@@ -11,10 +11,9 @@ module.exports = {
     if (req.body.email && req.body.password) {
       const { email, password } = req.body;
       const user = await User.findOne({ where: { email } });
-      const oldUser = await User.findOne({ where: { email, password } });
       if (user) {
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (isPasswordValid || oldUser) {
+        if (isPasswordValid) {
           req.session.userId = user.id; // Store userId in the session
           const username = user.username;
           console.log(`my user id is: ${user.id}`);

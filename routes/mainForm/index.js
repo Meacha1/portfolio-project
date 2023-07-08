@@ -1,15 +1,9 @@
 const express = require('express');
 const { project } = require('../../controller');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
-function Authenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-}
-
-router.get('/', Authenticated, (req, res) => {
+router.get('/', auth, (req, res) => {
     res.render("mainForm")
 });
 
