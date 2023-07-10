@@ -11,9 +11,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const dbConfig = require("./config/db-config.js");
-require('dotenv').config();
 
 
+const materials = require('./routes/material_api');
+const projects = require('./routes/project_api');
+const payments = require('./routes/paymentSMS_api');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const createUser = require('./routes/createUser');
@@ -22,6 +24,7 @@ const displayProject = require('./routes/displayProject');
 const forgetPassword = require('./routes/forgetPassword');
 const deleteProject = require('./routes/deleteProject');
 const vip = require('./routes/vip');
+
 
 // Middleware setup
 const sessionStore = new MySQLStore({
@@ -73,6 +76,9 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Routes
+app.use('/projects', projects);
+app.use('/payments', payments);
+app.use('/materials', materials);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/createUser', createUser);

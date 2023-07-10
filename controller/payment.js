@@ -16,7 +16,9 @@ module.exports = {
                 await Payment.update({ userId: userId }, { where: { transaction_number } });
                 await User.update({ isVIP: true }, { where: { id: userId } });
                 const remainingDays = Math.floor((payment.expiry_date - Date.now()) / (1000 * 60 * 60 * 24));
-                res.redirect("/mainForm", { remainingDays });
+                res.send(`<h1>Congratulations! You are now a VIP. You have ${remainingDays} days left</h1>
+                    <a href="/login">login</a>
+                `);                
             } else {
                 res.send("Transaction number already used");
                 return;

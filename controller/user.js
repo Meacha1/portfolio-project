@@ -3,6 +3,7 @@ const { models: { Payment } } = require('../models');
 const nodemailer = require('nodemailer');
 const dbConfig = require('../config/db-config.js');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 const host = dbConfig.HOST;
 
@@ -14,9 +15,12 @@ module.exports = {
       if (user) {
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (isPasswordValid) {
+          const token = jwt.sign({ id: user.id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
           req.session.userId = user.id; // Store userId in the session
+          req.session.token = token; // Store token in the session
           const username = user.username;
           console.log(`my user id is: ${user.id}`);
+          console.log(`my token is: ${token}`);
 
           const payment = await Payment.findOne({ where: { userId: user.id } });
           var remainingDays = 0;

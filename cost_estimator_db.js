@@ -21,7 +21,7 @@ connection.connect((err) => {
       console.error('Error creating MySQL database:', err);
       return;
     }
-    console.log('MySQL database created');
+    console.log('MySQL database created successfully');
     connection.end();
   });
 });

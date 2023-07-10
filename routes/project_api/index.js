@@ -18,7 +18,7 @@ const pool = mysql.createPool({
 });
 
 // Define the materials route
-app2.get('/api/projects', (req, res) => {
+app2.get('/', (req, res) => {
   // Get a connection from the pool
   pool.getConnection((err, connection) => {
     if (err) {
@@ -45,7 +45,7 @@ app2.get('/api/projects', (req, res) => {
   });
 });
 
-app2.get('/api/projects/:userId', (req, res) => {
+app2.get('/:userId', (req, res) => {
     // Get a connection from the pool
     pool.getConnection((err, connection) => {
         if (err) {
@@ -65,7 +65,7 @@ app2.get('/api/projects/:userId', (req, res) => {
     });
 });
 
-app2.get('/api/project/:projectName', (req, res) => {
+app2.get('/:projectName', (req, res) => {
     // Get a connection from the pool
     pool.getConnection((err, connection) => {
       if (err) {
@@ -85,7 +85,7 @@ app2.get('/api/project/:projectName', (req, res) => {
   });
 });
 
-app2.delete('/api/project/:id', (req, res) => {
+app2.delete('/:id', (req, res) => {
   // Get a connection from the pool
   pool.getConnection((err, connection) => {
     if (err) {

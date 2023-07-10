@@ -4,7 +4,7 @@ const { payment } = require('../../controller');
 const auth = require('../../middleware/auth');
 
 
-router.get('/',auth, (req, res) => {
+router.get('/', (req, res) => {
     res.render("beVip")
 });
 
