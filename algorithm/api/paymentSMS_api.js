@@ -4,7 +4,6 @@ const dbConfig = require("../../config/db-config.js");
 const e = require('express');
 
 const app3 = express();
-const port3 = 4002;
 
 // Add middleware to parse JSON request body
 app3.use(express.json());

@@ -3,7 +3,6 @@ const mysql = require('mysql');
 const dbConfig = require("../../config/db-config.js");
 
 const app1 = express();
-const port1 = 4003;
 
 // Add middleware to parse JSON request body
 app1.use(express.json());
