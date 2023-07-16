@@ -65,7 +65,7 @@ app2.get('/:userId', (req, res) => {
     });
 });
 
-app2.get('/:projectName', (req, res) => {
+app2.get('/api/:projectName', (req, res) => {
     // Get a connection from the pool
     pool.getConnection((err, connection) => {
       if (err) {

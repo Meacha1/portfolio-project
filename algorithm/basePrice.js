@@ -7,15 +7,12 @@ const { getMaterialPrices } = require('./materialPrices');
 
 var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
 
-
-
 // Material cost per meter square
 const calculateTotalMaterialCost = (reqBody) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const prices = await materialsPromise;
-
-      
+      const prices = await { materialsPromise };
+        
       // Material usage per meter square
       var cement = 2.1527; // quntal = 100 kg
       var sand = 0.5376; // meter cube

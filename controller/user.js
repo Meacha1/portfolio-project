@@ -30,7 +30,7 @@ module.exports = {
   
           // Fetch projects from the database
           try {
-            const response = await fetch(`http://${host}:4004/api/projects/${user.id}`);
+            const response = await fetch(`http://${host}:3000/projects/${user.id}`);
             if (response.ok) {
               const projects = await response.json();
               const projectnames = projects.map((project) => project.projectName);

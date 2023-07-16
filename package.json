@@ -34,9 +34,10 @@
     "passport-oauth2": "^1.7.0",
     "pug": "^3.0.2",
     "puppeteer": "^20.7.3",
-    "sequelize": "^6.31.1"
+    "sequelize": "^6.31.1",
+    "umzug": "^3.2.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.1"
   }
 }

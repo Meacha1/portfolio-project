@@ -3,9 +3,6 @@ const router = express.Router();
 const { project } = require('../../controller');
 const { models: { User } } = require('../../models');
 const dbConfig = require('../../config/db-config.js');
-
-
-
 const host = dbConfig.HOST;
 
 
@@ -17,7 +14,7 @@ router.get('/', (req, res) => {
   import('node-fetch')
     .then(({ default: fetch }) => {
       // Make your API call using the projectName variable
-      fetch(`http://${host}:4004/api/project/${encodeURIComponent(projectName)}`)
+      fetch(`http://${host}:3000/projects/api/${encodeURIComponent(projectName)}`)
         .then(response => response.json())
         .then(data => {
           // Render the Pug template and pass the API response data as a variable
