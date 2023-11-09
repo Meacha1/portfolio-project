@@ -26,7 +26,12 @@ module.exports = {
           var remainingDays = 0;
           if (payment) {
             remainingDays = Math.floor((payment.expiry_date - Date.now()) / (1000 * 60 * 60 * 24));
+            if (remainingDays < 0) {
+              remainingDays = 0;
+              await User.update({ isVIP: false }, { where: { id: req.session.userId} });
+            }
           }
+          
   
           // Fetch projects from the database
           try {

@@ -33,12 +33,8 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const userId = req.session.userId;
-  const user = await User.findOne({ where: { id: userId } });
-  if (user.isVIP) {
-    project.updateProject(req, res, userId); // Update the project in the database
-  } else {
-    res.redirect('vip'); // Redirect to the VIP page
-  }
+  project.updateProject(req, res, userId); // Update the project in the database
+
 });
 
 module.exports = router;

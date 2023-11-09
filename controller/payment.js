@@ -35,14 +35,17 @@ module.exports = {
             return;
         }
         const payment = await Payment.findOne({ where: { userId } });
+        if (!payment) {
+            await User.update({ isVIP: false }, { where: { id: userId } });
+            return;
+        }
         const remainingDays = Math.floor((payment.expiry_date - Date.now()) / (1000 * 60 * 60 * 24));
         console.log(`The reamaing days are ${remainingDays}`);
         if (remainingDays < 0) {
             await User.update({ isVIP: false }, { where: { id: userId } });
-            return;
         } else {
+            await User.update({ isVIP: true }, { where: { id: userId } });
             console.log("The user is still a VIP");
-            return;
         }
     }
 };

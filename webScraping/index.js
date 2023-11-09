@@ -41,7 +41,7 @@ async function scrapeMercato() {
   const productsHandles = await page.$$('div > div.col-md-9 > table > tbody > tr');
 
   const twoMonthsAgo = new Date();
-  twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+  twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 8);
 
   var cement = 0;
   var cementCount = 0;
@@ -109,8 +109,9 @@ async function scrapeMercato() {
     }
   }
   console.log('Average Price of HCB', HCB / HCBCount);
-  insertDataToMySQL('HCB', HCB / HCBCount);
-
+  if (HCB / HCBCount > 0) {
+    insertDataToMySQL('HCB', HCB / HCBCount);
+  }
   // Scrape data from another page
   await page.goto('https://con.2merkato.com/prices/cat/8', { timeout: 0 });
 

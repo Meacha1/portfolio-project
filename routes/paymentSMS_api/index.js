@@ -1,6 +1,6 @@
 const express = require('express');
-const mysql = require('mysql');
-const dbConfig = require("../../config/db-config.js");
+const { Pool } = require('pg');
+const dbConfig = require('../../config/db-config.js');
 
 const app3 = express();
 
@@ -8,12 +8,12 @@ const app3 = express();
 app3.use(express.json());
 
 // Create a MySQL pool
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: dbConfig.HOST,
+const pool = new Pool({
   user: dbConfig.USER,
+  host: dbConfig.HOST,
+  database: dbConfig.DATABASE,
   password: dbConfig.PASSWORD,
-  database: dbConfig.DATABASE
+  port: dbConfig.PORT,
 });
 
 // Handle SMS forwarding endpoint
@@ -55,15 +55,17 @@ app3.post('/', (req, res) => {
     transaction_number,
   };
 
-  pool.query('INSERT INTO payment SET ?', smsRecord, (error, results) => {
-    if (error) {
-      console.error('Failed to store SMS:', error);
-      return res.status(500).send('Failed to store SMS');
-    }
+  pool.query('INSERT INTO payment (message, transaction_amount, transaction_date, expiry_date, transaction_number) VALUES ($1, $2, $3, $4, $5)',
+    [smsRecord.message, smsRecord.transaction_amount, smsRecord.transaction_date, smsRecord.expiry_date, smsRecord.transaction_number],
+    (error, results) => {
+      if (error) {
+        console.error('Failed to store SMS:', error);
+        return res.status(500).send('Failed to store SMS');
+      }
 
-    console.log('SMS stored successfully');
-    res.status(200).send('SMS received and stored successfully');
-  });
+      console.log('SMS stored successfully');
+      res.status(200).send('SMS received and stored successfully');
+    });
 });
 
 

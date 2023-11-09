@@ -46,5 +46,6 @@ module.exports = (sequelize, DataTypes) => {
     return bcrypt.compare(password, this.password);
   };
 
+  console.log("User model is loaded");
   return User;
 };

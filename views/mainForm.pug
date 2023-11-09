@@ -56,7 +56,9 @@ html
           li
             a(href='/#contact') Contact
         ul
-          li Hello, #{username}. #{remainingDays} days left!
+          li Hello, #{username}
+           if remainingDays !== 0
+            h5 #{remainingDays} days left!
           li
             a(href='/logout', class='myButton') Logout
     div.container

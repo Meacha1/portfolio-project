@@ -8,10 +8,10 @@ const { getMaterialPrices } = require('./materialPrices');
 var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
 
 // Material cost per meter square
-const calculateTotalMaterialCost = (reqBody) => {
+const calculateTotalMaterialCost = async (reqBody) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const prices = await { materialsPromise };
+      const prices = await materialsPromise;
         
       // Material usage per meter square
       var cement = 2.1527; // quntal = 100 kg
@@ -252,9 +252,13 @@ const calculateTotalMaterialCost = (reqBody) => {
         tile: tile * getMaterialPrices()[tileType]
       };
 
+      console.log('materialCost: ', materialCost);
+
       var materialCostSum = Object.values(materialCost).reduce((a, b) => a + b, 0);
+      console.log('materialCostSum: ', materialCostSum);
       var remainingMaterialCost = materialCostSum * (remainingPercent / percentageSum);
       var totalCostPermeter = (materialCostSum + remainingMaterialCost) * (100 / (100 - otherPercentage));
+      console.log('totalCostPermeter: ', totalCostPermeter);
 
 
       resolve({ totalCostPermeter, cement, sand, aggregate, steel, HCB, paint, tile, paint});

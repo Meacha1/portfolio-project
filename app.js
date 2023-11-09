@@ -1,14 +1,13 @@
-const CreateDb = require('./cost_estimator_db.js') // importing the database creation file will create the database if it doesn't exist
+const dbConfig = require("./config/db-config.js");
 const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
+const pgSession = require('connect-pg-simple')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('./models/user');
-const dbConfig = require("./config/db-config.js");
+const User = require('./migrations/20230716114141_migration'); // Assuming this is your User model
 const db = require('./models/index');
 const scrapeMercato = require('./webScraping/index');
 
@@ -24,15 +23,18 @@ const forgetPassword = require('./routes/forgetPassword');
 const deleteProject = require('./routes/deleteProject');
 const vip = require('./routes/vip');
 
-
 // Middleware setup
-const sessionStore = new MySQLStore({
-  host: dbConfig.HOST,
-  port: dbConfig.PORT,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DATABASE,
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// PostgreSQL session store setup
+const sessionStore = new pgSession({
+  conString: `postgres://${dbConfig.USER}:${dbConfig.PASSWORD}@${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DATABASE}`,
+  tableName: 'session'
 });
+
 app.use(session({
   store: sessionStore,
   secret: 'meacha123',
@@ -42,10 +44,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.static("./public"));
-app.use(express.urlencoded({ extended: true }));
 
 // Passport local strategy
 passport.use(new LocalStrategy({
@@ -86,7 +84,6 @@ app.use('/forgetPassword', forgetPassword);
 app.use('/deleteProject', deleteProject);
 app.use('/vip', vip);
 
-
 // Database synchronization
 (async () => {
   try {
@@ -97,7 +94,7 @@ app.use('/vip', vip);
   }
 })();
 
-// web scraping function
+// Web scraping function
 scrapeMercato();
 
 module.exports = app;

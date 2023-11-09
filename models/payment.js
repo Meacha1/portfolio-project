@@ -44,5 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  console.log("Payment model is loaded");
+
   return Payment;
 };

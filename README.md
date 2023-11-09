@@ -61,6 +61,6 @@ For any questions, feedback, or inquiries, please feel free to reach out to us:
 
 ## Project Screenshots
 
-![Screenshot 1](public/images/Screenshot.png))
+![Screenshot 1](public/images/Screenshot.png)
 
 ![Screenshot 2](public/images/Screenshot1.png)

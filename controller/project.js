@@ -29,10 +29,8 @@ module.exports = {
 
     const user = await User.findOne({ where: { id: userId } });
     // run isExpired from Payment model to check if the user is still a VIP
-    if (user.isVIP) {
-      isExpired(req, res);
-    }
-
+   
+    await isExpired(req, res);
 
     if (!user) {
       res.send("User not found");
@@ -73,7 +71,8 @@ module.exports = {
 
       const totalmaterialCost = await calculateTotalMaterialCost(reqBody); // Calculate totalmaterialCost
 
-      const costEstimate = estimation(totalmaterialCost, reqBody);
+      var costEstimate = estimation(totalmaterialCost, reqBody);
+      costEstimate = parseInt(costEstimate);
 
       const cement = parseInt(totalmaterialCost.cement * area).toLocaleString();
       const sand = parseInt(totalmaterialCost.sand * area).toLocaleString();
@@ -176,6 +175,25 @@ module.exports = {
     if (!userId) {
       res.send("User ID not available");
       return;
+    }
+
+    const user = await User.findOne({ where: { id: userId } });
+    // run isExpired from Payment model to check if the user is still a VIP
+
+    await isExpired(req, res);
+
+
+    if (!user) {
+      res.send("User not found");
+      return;
+    } else {
+      const projectCount = user.projectCount + 1;
+      if (projectCount > 5 && !user.isVIP) {
+        res.render("beVip");
+        return;
+      } else {
+        await User.update({ projectCount }, { where: { id: userId } });
+      }
     }
   
     const project = await Project.findOne({ where: { projectName, userId } });

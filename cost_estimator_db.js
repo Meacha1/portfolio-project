@@ -1,27 +1,46 @@
-const mysql = require('mysql');
+const { Pool } = require('pg');
 const dbConfig = require('./config/db-config.js');
 
-const connection = mysql.createConnection({
-  host: dbConfig.HOST,
+const pool = new Pool({
   user: dbConfig.USER,
-  port: dbConfig.PORT,
+  host: dbConfig.HOST,
+  database: 'postgres', // Default database to connect for creating the specified database
   password: dbConfig.PASSWORD,
+  port: dbConfig.PORT,
 });
 
-connection.connect((err) => {
+pool.connect((err, client, release) => {
   if (err) {
-    console.error('Error connecting to MySQL server:', err);
+    console.error('Error connecting to PostgreSQL server:', err);
     return;
   }
-  console.log('Connected to MySQL server');
+  console.log('Connected to PostgreSQL server');
 
-  // Create the database
-  connection.query(`CREATE DATABASE IF NOT EXISTS ${dbConfig.DATABASE}`, (err) => {
+  // Check if the database exists
+  client.query(`SELECT 1 FROM pg_database WHERE datname = '${dbConfig.DATABASE}'`, (err, result) => {
     if (err) {
-      console.error('Error creating MySQL database:', err);
+      console.error('Error checking PostgreSQL database:', err);
+      release(); // Release the client back to the pool
+      pool.end(); // End the pool connection
       return;
     }
-    console.log('MySQL database created successfully');
-    connection.end();
+
+    if (result.rows.length === 0) {
+      // Database does not exist, create it
+      client.query(`CREATE DATABASE ${dbConfig.DATABASE}`, (err, result) => {
+        if (err) {
+          console.error('Error creating PostgreSQL database:', err);
+        } else {
+          console.log('PostgreSQL database created successfully');
+        }
+        release(); // Release the client back to the pool
+        pool.end(); // End the pool connection
+      });
+    } else {
+      // Database already exists
+      console.log('PostgreSQL database already exists');
+      release(); // Release the client back to the pool
+      pool.end(); // End the pool connection
+    }
   });
 });

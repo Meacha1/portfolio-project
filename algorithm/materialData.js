@@ -33,8 +33,6 @@ const materialsPromise = Promise.all([
     const ceramicImportedPrice = materialsData.find((item) => item.item === 'ceramicImported').price;
     const porcelineLocalPrice = materialsData.find((item) => item.item === 'porcelineLocal').price;
     const porcelineImportedPrice = materialsData.find((item) => item.item === 'porcelineImported').price;
-
-    console.log('sandPrice', sandPrice);
     
     return { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice  };
   })

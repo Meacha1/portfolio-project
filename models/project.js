@@ -27,5 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  console.log("Project model is loaded");
   return Project;
 };

@@ -24,6 +24,6 @@ module.exports = (sequelize) => {
         freezeTableName: true
     });
 
-    console.log('MaterialPrice table is created');
+    console.log("MaterialPrice model is loaded");
     return MaterialPrice;
 };

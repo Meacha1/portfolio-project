@@ -3,11 +3,11 @@
 <head>
 	<title>Create Account</title>
 	<link rel="stylesheet" href="../css/createUser.css">
+	<script src="../js/showPassword.js"></script>
 </head>
 <body>
 	<header>
 		<nav>
-			
 			<ul>
 				<a href="/"><img src="../images/logo.png" alt="logo"></a>
 				<li><a href="/">Home</a></li>
@@ -25,7 +25,8 @@
 			<input type="email" id="email" name="email" required><br><br>
 
 			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" required><br><br>
+			<input type="password" id="password" name="password" required>
+			<input type="checkbox" onclick="togglePassword()"> Show Password<br><br>
 
 			<button type="submit" value='Login'>Log-in</button>
 		</form>
