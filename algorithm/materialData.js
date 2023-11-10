@@ -11,7 +11,7 @@ async function fetchDataFromDatabase(apiUrl) {
 
 // Define a function to fetch materials data from the database
 async function fetchMaterialsDataFromDatabase() {
-  const apiUrl = `http://${host}:3000/materials`;
+  const apiUrl = `https://addis-cost-estimation.vercel.app/materials`;
   const materialsData = await fetchDataFromDatabase(apiUrl);
   return materialsData;
 }
