@@ -11,7 +11,6 @@ const User = require('./migrations/20230716114141_migration'); // Assuming this 
 const db = require('./models/index');
 const scrapeMercato = require('./webScraping/index');
 
-const materials = require('./routes/material_api');
 const projects = require('./routes/project_api');
 const payments = require('./routes/paymentSMS_api');
 const login = require('./routes/login');
@@ -74,7 +73,6 @@ app.set('views', path.join(__dirname, 'views'));
 // Routes
 app.use('/projects', projects);
 app.use('/payments', payments);
-app.use('/materials', materials);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/createUser', createUser);
