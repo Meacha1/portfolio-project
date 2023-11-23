@@ -1,9 +1,11 @@
 const { models: { User } } = require('../models');
 const { models: { Payment } } = require('../models');
+const { models: { Project } } = require('../models');
 const nodemailer = require('nodemailer');
 const dbConfig = require('../config/db-config.js');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const project = require('./project.js');
 
 const host = dbConfig.HOST;
 
@@ -35,7 +37,8 @@ module.exports = {
   
           // Fetch projects from the database
           try {
-            const response = await fetch(`http://${host}:3000/projects/${user.id}`);
+            //const response = await fetch(`http://${host}:3000/projects/${user.id}`);
+            const response = await Project.findAll({ where: { userId: user.id } });
             if (response.ok) {
               const projects = await response.json();
               const projectnames = projects.map((project) => project.projectName);
