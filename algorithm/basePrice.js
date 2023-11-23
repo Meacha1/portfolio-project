@@ -1,7 +1,5 @@
-const { setMaterialPrices } = require('./materialPrices');
-const { materialsPromise } = require('./materialData');
-const { getMaterialPrices } = require('./materialPrices');
-
+const { INTEGER } = require('sequelize');
+const { models: { MaterialPrice } } = require('../models');
 
 // percentage other than material
 
@@ -10,9 +8,7 @@ var otherPercentage = 40;   // 40% of total project cost, this includes labor co
 // Material cost per meter square
 const calculateTotalMaterialCost = async (reqBody) => {
   return new Promise(async (resolve, reject) => {
-    try {
-      const prices = await materialsPromise;
-        
+    try {        
       // Material usage per meter square
       var cement = 2.1527; // quntal = 100 kg
       var sand = 0.5376; // meter cube
@@ -40,8 +36,21 @@ const calculateTotalMaterialCost = async (reqBody) => {
 
       var otherPercentage = 40;   // 40% of total project cost, this includes labor cost, equipment, transportation cost, etc.
       // Set the material prices
-      const { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice } = prices;
-      setMaterialPrices(sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice);
+      //const { sandPrice, aggregatePrice, cementPrice, steelPrice, HCBPrice, paintPrice, marbleLocalPrice, graniteLocalPrice, graniteImportedPrice, ceramicLocalPrice, ceramicImportedPrice, porcelineLocalPrice, porcelineImportedPrice } = 
+     
+      const sandPrice = await MaterialPrice.findOne({ where: { item: 'sand' } }).then((data) => data.price);
+      const aggregatePrice = await MaterialPrice.findOne({ where: { item: 'aggregate' } }).then((data) => data.price);
+      const cementPrice = await MaterialPrice.findOne({ where: { item: 'cement' } }).then((data) => data.price);
+      const steelPrice = await MaterialPrice.findOne({ where: { item: 'steel' } }).then((data) => data.price);
+      const HCBPrice = await MaterialPrice.findOne({ where: { item: 'HCB' } }).then((data) => data.price);
+      const paintPrice = await MaterialPrice.findOne({ where: { item: 'paint' } }).then((data) => data.price);
+      const marbleLocalPrice = await MaterialPrice.findOne({ where: { item: 'marbleLocal' } }).then((data) => data.price);
+      const graniteLocalPrice = await MaterialPrice.findOne({ where: { item: 'graniteLocal' } }).then((data) => data.price);
+      const graniteImportedPrice = await MaterialPrice.findOne({ where: { item: 'graniteImported' } }).then((data) => data.price);
+      const ceramicLocalPrice = await MaterialPrice.findOne({ where: { item: 'ceramicLocal' } }).then((data) => data.price);
+      const ceramicImportedPrice = await MaterialPrice.findOne({ where: { item: 'ceramicImported' } }).then((data) => data.price);
+      const porcelineLocalPrice = await MaterialPrice.findOne({ where: { item: 'porcelineLocal' } }).then((data) => data.price);
+      const porcelineImportedPrice = await MaterialPrice.findOne({ where: { item: 'porcelineImported' } }).then((data) => data.price);
 
       // importing the body of the request
       const numberOfFloorsAboveGroundFloor = parseInt(reqBody.aboveGroundFloor);
@@ -116,9 +125,29 @@ const calculateTotalMaterialCost = async (reqBody) => {
 
       // applying the logic for floor finish
 
-      const tileType = reqBody.floorFinishingType + "Price";
+      var tileType = reqBody.floorFinishingType + "Price";
+      if (reqBody.floorFinishingType == "marbleLocal") {
+        tileType = marbleLocalPrice;
+      }
+      if (reqBody.floorFinishingType == "graniteLocal") {
+        tileType = graniteLocalPrice;
+      }
+      if (reqBody.floorFinishingType == "graniteImported") {
+        tileType = graniteImportedPrice;
+      }
+      if (reqBody.floorFinishingType == "ceramicLocal") {
+        tileType = ceramicLocalPrice;
+      }
+      if (reqBody.floorFinishingType == "ceramicImported") {
+        tileType = ceramicImportedPrice;
+      }
+      if (reqBody.floorFinishingType == "porcelineLocal") {
+        tileType = porcelineLocalPrice;
+      }
+      if (reqBody.floorFinishingType == "porcelineImported") {
+        tileType = porcelineImportedPrice;
+      }
 
-      console.log('precentage.tile: ', percentage.tile)
 
       if (reqBody.floorFinishingType == "marbleLocal") {
         percentage.tile = percentage.tile + 10;   // i will chane the hardcoded value by takeking the ratio of materil price to total material price
@@ -153,35 +182,35 @@ const calculateTotalMaterialCost = async (reqBody) => {
 
       const carpentryAndJoinery = reqBody.carpentryAndJoinery;
 
-      if (reqBody.carpentryAndJoinery == "low") {
+      if (carpentryAndJoinery == "low") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery + 1;
       }
 
-      if (reqBody.carpentryAndJoinery == "low1") {
+      if (carpentryAndJoinery == "low1") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 0.5;
       }
 
-      if (reqBody.carpentryAndJoinery == "medium") {
+      if (carpentryAndJoinery == "medium") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 0.5;
       }
 
-      if (reqBody.carpentryAndJoinery == "medium1") {
+      if (carpentryAndJoinery == "medium1") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 2;
       }
 
-      if (reqBody.carpentryAndJoinery == "high") {
+      if (carpentryAndJoinery == "high") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 2;
       }
 
-      if (reqBody.carpentryAndJoinery == "high1") {
+      if (carpentryAndJoinery == "high1") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 3;
       }
 
-      if (reqBody.carpentryAndJoinery == "best") {
+      if (carpentryAndJoinery == "best") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 3;
       }
 
-      if (reqBody.carpentryAndJoinery == "best1") {
+      if (carpentryAndJoinery == "best1") {
         percentage.carpentryAndJoinery = percentage.carpentryAndJoinery - 4;
       }
 
@@ -236,20 +265,19 @@ const calculateTotalMaterialCost = async (reqBody) => {
         percentage.electricalMaterial = percentage.electricalMaterial - 2;
       }
 
-
       
       var percentageSum = Object.values(percentage).reduce((a, b) => a + b, 0);
       var remainingPercent = 100 - percentageSum;
       
       // calculate the material cost
       var materialCost = {
-        cement: cement * getMaterialPrices().cementPrice,
-        sand: sand * getMaterialPrices().sandPrice,
-        aggregate: aggregate * getMaterialPrices().aggregatePrice,
-        steel: steel * getMaterialPrices().steelPrice,
-        HCB: HCB * getMaterialPrices().HCBPrice,
-        paint: paint * getMaterialPrices().paintPrice,
-        tile: tile * getMaterialPrices()[tileType]
+        cement: cement * cementPrice,
+        sand: sand * sandPrice,
+        aggregate: aggregate * aggregatePrice,
+        steel: steel * steelPrice,
+        HCB: HCB * HCBPrice,
+        paint: paint * paintPrice,
+        tile: tile *tileType,
       };
 
       console.log('materialCost: ', materialCost);
@@ -258,6 +286,8 @@ const calculateTotalMaterialCost = async (reqBody) => {
       console.log('materialCostSum: ', materialCostSum);
       var remainingMaterialCost = materialCostSum * (remainingPercent / percentageSum);
       var totalCostPermeter = (materialCostSum + remainingMaterialCost) * (100 / (100 - otherPercentage));
+      // cast the totalCostPermeter to an integer
+      totalCostPermeter = Math.round(totalCostPermeter);
       console.log('totalCostPermeter: ', totalCostPermeter);
 
 
